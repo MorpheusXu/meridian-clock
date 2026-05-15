@@ -1,0 +1,68 @@
+/* =========================================
+   Meridian Clock 核心样式表 V13 (大圆满版)
+========================================= */
+
+.meridian-clock-wrapper { display: flex; justify-content: center; align-items: center; height: 100%; width: 100%; overflow: hidden; padding: 10px; box-sizing: border-box; }
+.meridian-world-clock-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 15px; width: 100%; height: 100%; }
+.meridian-clock-item { display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; width: 100%; height: 100%; }
+
+/* --- 钟表 --- */
+.meridian-svg { width: 100%; max-width: 220px; height: auto; aspect-ratio: 1 / 1; filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.2)); }
+.meridian-world-clock-grid .meridian-svg { max-width: 120px; }
+.meridian-svg-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; text-anchor: middle; dominant-baseline: central; }
+.meridian-svg-text.outer-number { font-size: 8px; font-weight: 600; }
+.meridian-svg-text.inner-number { font-size: 25px; font-weight: 500; letter-spacing: -0.05em; }
+.meridian-date-text { font-size: 17px; font-weight: 500; letter-spacing: -0.02em; }
+
+/* --- 电子表 --- */
+.meridian-digital-face {
+    width: 100%; height: 100%; max-width: 220px; aspect-ratio: 1 / 1;
+    font-variant-numeric: tabular-nums; text-align: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; background: transparent;
+}
+.meridian-world-clock-grid .meridian-digital-face { max-width: 120px; }
+.meridian-digital-time { font-size: 3.8em; line-height: 1; letter-spacing: -1px; display: flex; align-items: baseline; justify-content: center; }
+.meridian-digital-seconds { font-size: 0.4em; margin-left: 6px; opacity: 0.9; font-weight: 700; }
+.meridian-world-clock-grid .meridian-digital-time { font-size: 1.8em; }
+
+/* --- 预览区统一样式 --- */
+.meridian-settings-preview-container { display: flex; justify-content: center; align-items: center; padding: 20px; margin-bottom: 20px; min-height: 200px; background-color: var(--background-secondary); border-radius: 8px; border: 1px solid var(--background-modifier-border); }
+.meridian-settings-preview-container .meridian-svg { max-width: 180px; filter: none; }
+.meridian-settings-preview-container .meridian-digital-face { max-width: 180px; }
+.meridian-settings-preview-container .meridian-digital-time { font-size: 4em; }
+.meridian-timezone-label { margin-top: 8px; font-size: 0.85em; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+/* =========================================
+   设置面板专属样式
+========================================= */
+.meridian-face-tabs { display: flex; background: var(--background-modifier-form-field); border-radius: 8px; padding: 4px; margin-bottom: 20px; }
+.meridian-face-tab { flex: 1; text-align: center; padding: 8px 0; cursor: pointer; border-radius: 6px; font-weight: 600; color: var(--text-muted); transition: all 0.2s ease; }
+.meridian-face-tab.is-active { background: var(--background-primary); color: var(--text-normal); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+
+.meridian-details { background-color: var(--background-secondary-alt); border: 1px solid var(--background-modifier-border); border-radius: 6px; margin-bottom: 12px; padding: 0 16px; }
+.meridian-details > summary { font-size: 1.1em; font-weight: 600; color: var(--text-normal); padding: 12px 0; cursor: pointer; outline: none; list-style: none; display: flex; align-items: center; }
+.meridian-details > summary::-webkit-details-marker { display: none; }
+.meridian-details > summary::before { content: '▶'; display: inline-block; width: 20px; font-size: 0.8em; transition: transform 0.2s ease; color: var(--text-muted); }
+.meridian-details[open] > summary::before { transform: rotate(90deg); }
+.meridian-details > .setting-item { border-top: 1px solid var(--background-modifier-border); border-bottom: none; }
+
+.meridian-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 16px; padding: 16px 0; }
+.meridian-preset-card { display: flex; flex-direction: column; align-items: center; background: var(--background-primary); border: 1px solid var(--background-modifier-border); border-radius: 8px; padding: 12px; cursor: pointer; transition: all 0.2s ease; }
+.meridian-preset-card:hover { border-color: var(--interactive-accent); box-shadow: 0 4px 8px rgba(0,0,0,0.1); transform: translateY(-2px); }
+.meridian-preset-svg-wrapper { width: 80px; height: 80px; margin-bottom: 8px; pointer-events: none; }
+.meridian-preset-svg-wrapper svg, .meridian-preset-svg-wrapper .meridian-digital-face { width: 100%; height: 100%; filter: none; }
+.meridian-preset-name { font-size: 0.85em; font-weight: 600; text-align: center; color: var(--text-normal); line-height: 1.2; }
+.meridian-delete-btn { margin-top: 8px; font-size: 0.75em; color: var(--text-error); background: transparent; border: 1px solid var(--text-error); border-radius: 4px; padding: 2px 8px; cursor: pointer; }
+.meridian-delete-btn:hover { background: var(--background-modifier-error); color: white; }
+
+.meridian-font-picker { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 10px 0; }
+.meridian-font-card { border: 2px solid var(--background-modifier-border); border-radius: 8px; padding: 16px 0; text-align: center; cursor: pointer; background: var(--background-primary); transition: 0.2s; font-size: 1.8em; }
+.meridian-font-card:hover { border-color: var(--text-muted); }
+.meridian-font-card.is-active { border-color: var(--interactive-accent); box-shadow: 0 0 8px rgba(0,0,0,0.2); }
+.meridian-font-label { font-size: 0.4em; font-family: var(--font-interface); color: var(--text-muted); margin-top: 4px; }
+
+.meridian-city-list { display: flex; flex-direction: column; gap: 8px; padding: 10px 0; }
+.meridian-city-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--background-primary); border: 1px solid var(--background-modifier-border); border-radius: 6px; }
+.meridian-city-info { display: flex; flex-direction: column; gap: 4px; }
+.meridian-city-name { font-weight: 600; font-size: 0.9em; color: var(--text-normal); }
+.meridian-city-tz { font-size: 0.75em; font-family: monospace; color: var(--text-muted); }

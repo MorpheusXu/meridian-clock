@@ -1,0 +1,10 @@
+{
+  "id": "meridian-clock",
+  "name": "Meridian Clock",
+  "version": "1.0.0",
+  "minAppVersion": "1.0.0",
+  "description": "An aesthetic, highly customizable analog and digital world clock. Features precise global timezones, custom dial geometries, and seamless theme integration.",
+  "author": "Morpheus Guo",
+  "authorUrl": "https://github.com/MorpheusXu",
+  "isDesktopOnly": false
+}
