@@ -2,7 +2,7 @@
   <a href="./README.md">English</a> | <strong>简体中文</strong>
 </div>
 
-# Meridian for Obsidian
+# Meridian Clock
 
 Meridian 是一个 Obsidian 时钟插件。它提供指针和数字两种模式的表盘，你可以把它放在侧边栏，用来方便地查看本地时间或其他时区的时间。
 

@@ -2,7 +2,7 @@
   <strong>English</strong> | <a href="./README_zh.md">简体中文</a>
 </div>
 
-# Meridian for Obsidian
+# Meridian Clock
 
 Meridian is a clock plugin for Obsidian. It provides customizable analog and digital clocks that you can place in your sidebar to keep track of your local time or other timezones around the world.
 

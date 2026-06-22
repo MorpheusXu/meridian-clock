@@ -128,7 +128,7 @@ const CITY_DB: CityDef[] = [
     { id: "dakar", en: "Dakar", zh: "达喀尔", tz: "Africa/Dakar" }, { id: "accra", en: "Accra", zh: "阿克拉", tz: "Africa/Accra" }, { id: "khartoum", en: "Khartoum", zh: "喀土穆", tz: "Africa/Khartoum" }, { id: "kinshasa", en: "Kinshasa", zh: "金沙萨", tz: "Africa/Kinshasa" },
     { id: "luanda", en: "Luanda", zh: "罗安达", tz: "Africa/Luanda" }, { id: "harare", en: "Harare", zh: "哈拉雷", tz: "Africa/Harare" }
 ];
-function getCityById(id: string, customCities: CityDef[] = []): CityDef { const f = [...CITY_DB, ...customCities].find(c => c.id === id); return f !== undefined ? f : CITY_DB[0]; }
+function getCityById(id: string, customCities: CityDef[] = []): CityDef { const f = [...CITY_DB, ...customCities].find(c => c.id === id); return (f as CityDef) || CITY_DB[0]; }
 
 // 涵盖几乎所有 IANA 时区后缀的巨型中文翻译字典
 const TZ_ZH_MAP: Record<string, string> = { "Abidjan":"阿比让","Accra":"阿克拉","Algiers":"阿尔及尔","Bissau":"比绍","Cairo":"开罗","Casablanca":"卡萨布兰卡","Ceuta":"休达","El_Aaiun":"阿尤恩","Johannesburg":"约翰内斯堡","Juba":"朱巴","Khartoum":"喀土穆","Lagos":"拉各斯","Maputo":"马普托","Monrovia":"蒙罗维亚","Nairobi":"内罗毕","Ndjamena":"恩贾梅纳","Sao_Tome":"圣多美","Tripoli":"的黎波里","Tunis":"突尼斯","Windhoek":"温得和克","Adak":"埃达克","Anchorage":"安克雷奇","Anguilla":"安圭拉","Antigua":"安提瓜","Araguaina":"阿拉瓜伊纳","Argentina":"阿根廷","Buenos_Aires":"布宜诺斯艾利斯","Catamarca":"卡塔马卡","Cordoba":"科尔多瓦","Jujuy":"胡胡伊","La_Rioja":"拉里奥哈","Mendoza":"门多萨","Rio_Gallegos":"里奥加耶戈斯","Salta":"萨尔塔","San_Juan":"圣胡安","San_Luis":"圣路易斯","Tucuman":"图库曼","Ushuaia":"乌斯怀亚","Aruba":"阿鲁巴","Asuncion":"亚松森","Bahia":"巴伊亚","Bahia_Banderas":"巴伊亚班德拉斯","Barbados":"巴巴多斯","Belize":"伯利兹","Blanc-Sablon":"布朗萨布隆","Boa_Vista":"博阿维斯塔","Bogota":"波哥大","Boise":"博伊西","Cuiaba":"库亚巴","Curacao":"库拉索","Danmarkshavn":"丹麦港","Dawson":"道森","Dawson_Creek":"道森克里克","Denver":"丹佛","Detroit":"底特律","Dominica":"多米尼加","Edmonton":"埃德蒙顿","Eirunepe":"埃鲁内佩","El_Salvador":"萨尔瓦多","Fort_Nelson":"纳尔逊堡","Fortaleza":"福塔莱萨","Glace_Bay":"格莱斯湾","Godthab":"戈特霍布","Goose_Bay":"鹅湾","Grand_Turk":"大特克","Grenada":"格林纳达","Guadeloupe":"瓜德罗普","Guatemala":"危地马拉","Guayaquil":"瓜亚基尔","Guyana":"圭亚那","Halifax":"哈利法克斯","Havana":"哈瓦那","Hermosillo":"埃莫西约","Indiana":"印第安纳","Indianapolis":"印第安纳波利斯","Knox":"诺克斯","Marengo":"马伦戈","Petersburg":"彼得斯堡","Tell_City":"特尔城","Vevay":"韦韦","Vincennes":"万塞讷","Winamac":"温纳马克","Inuvik":"伊努维克","Iqaluit":"伊卡卢伊特","Jamaica":"牙买加","Juneau":"朱诺","Kentucky":"肯塔基","Louisville":"路易斯维尔","Monticello":"蒙蒂塞洛","Kralendijk":"克拉伦代克","La_Paz":"拉巴斯","Lima":"利马","Los_Angeles":"洛杉矶","Lower_Princes":"下王子区","Maceio":"马塞约","Managua":"马那瓜","Manaus":"马瑙斯","Marigot":"马里戈特","Martinique":"马提尼克","Matamoros":"马塔莫罗斯","Mazatlan":"马萨特兰","Menominee":"梅诺米尼","Merida":"梅里达","Metlakatla":"梅特拉卡特拉","Mexico_City":"墨西哥城","Miquelon":"密克隆","Moncton":"蒙克顿","Monterrey":"蒙特雷","Montevideo":"蒙得维的亚","Montserrat":"蒙特塞拉特","Nassau":"拿骚","New_York":"纽约","Nipigon":"尼皮贡","Nome":"诺姆","Noronha":"诺罗尼亚","North_Dakota":"北达科他","Beulah":"比尤拉","Center":"中心城","New_Salem":"新塞勒姆","Ojinaga":"奥希纳加","Panama":"巴拿马","Pangnirtung":"庞纳图","Paramaribo":"帕拉马里博","Phoenix":"凤凰城","Port-au-Prince":"太子港","Port_of_Spain":"西班牙港","Porto_Velho":"韦柳港","Puerto_Rico":"波多黎各","Punta_Arenas":"蓬塔阿雷纳斯","Rankin_Inlet":"兰金因莱特","Recife":"累西腓","Regina":"里贾纳","Resolute":"雷索卢特","Rio_Branco":"里约布兰科","Santarem":"圣塔伦","Santiago":"圣地亚哥","Santo_Domingo":"圣多明各","Sao_Paulo":"圣保罗","Scoresbysund":"斯科斯比松","Sitka":"锡特卡","St_Barthelemy":"圣巴泰勒米","St_Johns":"圣约翰","St_Kitts":"圣基茨","St_Lucia":"圣卢西亚","St_Thomas":"圣托马斯","St_Vincent":"圣文森特","Swift_Current":"斯威夫特卡伦特","Tegucigalpa":"特古西加尔巴","Thule":"图勒","Thunder_Bay":"桑德贝","Tijuana":"蒂华纳","Toronto":"多伦多","Tortola":"托尔托拉","Vancouver":"温哥华","Whitehorse":"怀特霍斯","Winnipeg":"温尼伯","Yakutat":"亚库塔特","Yellowknife":"黄刀","Crestone":"克雷斯通" };
@@ -138,12 +138,12 @@ function getTzDisplayName(tz: string, lang: 'en' | 'zh'): string {
     if (lang !== 'zh') return tz.replace(/_/g, ' ');
     // 1. 优先查核心城市库
     const matched = CITY_DB.find(c => c.tz === tz);
-    if (matched && matched.zh) return `(${TZ_PREFIX[tz.split('/')[0]] || ''}) ${matched.zh}`;
+    if (matched && matched.zh) return `(${TZ_PREFIX[tz.split('/')[0] as string] || ''}) ${matched.zh}`;
     // 2. 使用强大翻译字典
     let parts = tz.split('/');
     if (parts.length === 1) return tz;
-    let prefix = TZ_PREFIX[parts[0]] || parts[0];
-    let suffix = parts[parts.length - 1]; // 取最后一节
+    let prefix = TZ_PREFIX[parts[0] as string] || parts[0];
+    let suffix = parts[parts.length - 1] as string; // 取最后一节
     let translatedSuffix = TZ_ZH_MAP[suffix] || suffix.replace(/_/g, ' ');
     return `${prefix} / ${translatedSuffix}`;
 }
@@ -160,7 +160,7 @@ interface MeridianSettings {
     hHandColor: string; customHHandColor: string; mHandColor: string; customMHandColor: string;
     outerRing: 'ticks' | 'ticks-dense' | 'ticks-uniform' | 'dots-lines' | 'numbers' | 'hidden'; 
     innerRing: 'ticks' | 'numbers' | 'hidden'; secondHandMode: 'sweep' | 'tick' | 'hidden'; showDate: boolean;
-    digitalTimeColor: string; customDigitalTimeColor: string; digitalSecColor: string; customDigitalSecColor: string; digitalSecSize: 'small' | 'large'; digitalFont: string;
+    digitalTimeColor: string; customDigitalTimeColor: string; digitalSecColor: string; customDigitalSecColor: string; digitalSecSize: 'small' | 'large' | 'hidden'; digitalFont: string;
     cityIds: [string, string, string, string]; userPresets: SavedPreset[]; customCities: CityDef[];
 }
 
@@ -227,7 +227,7 @@ class ClockRenderer {
         if (type === 'accent') return (settings.presetColor === 'custom' ? settings.customColor : settings.presetColor) || '#FF9500';
         if (type === 'bg') return (settings.dialBgColor === 'custom' ? settings.customDialBgColor : settings.dialBgColor) || 'none';
         
-        let val = '';
+        let val: string | undefined = '';
         if (type === 'num') val = settings.numberColor === 'custom' ? settings.customNumberColor : settings.numberColor;
         if (type === 'tick') val = settings.tickColor === 'custom' ? settings.customTickColor : settings.tickColor;
         if (type === 'hHand') val = settings.hHandColor === 'custom' ? settings.customHHandColor : settings.hHandColor;
@@ -240,12 +240,12 @@ class ClockRenderer {
 
     static buildAnalogSVG(settings: Partial<MeridianSettings>, accent: string, bg: string, numC: string, tickC: string): SVGElement {
         const svgNS = "http://www.w3.org/2000/svg";
-        const svg = document.createElementNS(svgNS, "svg");
+        const svg = activeDocument.createElementNS(svgNS, "svg");
         svg.setAttribute("viewBox", "0 0 200 200");
         svg.classList.add("meridian-svg");
 
         if (bg !== 'none' && bg) {
-            const bgCircle = document.createElementNS(svgNS, "circle");
+            const bgCircle = activeDocument.createElementNS(svgNS, "circle");
             bgCircle.setAttribute("cx", "100"); bgCircle.setAttribute("cy", "100");
             bgCircle.setAttribute("r", "94"); bgCircle.setAttribute("fill", bg);
             svg.appendChild(bgCircle);
@@ -262,7 +262,7 @@ class ClockRenderer {
                 const rad = (angle - 90) * (Math.PI / 180);
 
                 if (outerRing === 'ticks' || outerRing === 'ticks-uniform' || outerRing === 'ticks-dense') {
-                    const line = document.createElementNS(svgNS, "line");
+                    const line = activeDocument.createElementNS(svgNS, "line");
                     line.setAttribute("x1", "100"); line.setAttribute("y1", "4"); line.setAttribute("x2", "100"); line.setAttribute("y2", "10");
                     line.setAttribute("stroke-linecap", "round"); line.setAttribute("transform", `rotate(${angle}, 100, 100)`);
                     if (outerRing === 'ticks') { line.setAttribute("stroke", isHour ? tickC : tickSec); line.setAttribute("stroke-width", isHour ? "2.5" : "1"); } 
@@ -271,24 +271,24 @@ class ClockRenderer {
                     svg.appendChild(line);
                 } else if (outerRing === 'dots-lines') {
                     if (isHour) {
-                        const line = document.createElementNS(svgNS, "line");
+                        const line = activeDocument.createElementNS(svgNS, "line");
                         line.setAttribute("x1", "100"); line.setAttribute("y1", "7"); line.setAttribute("x2", "100"); line.setAttribute("y2", "27.5"); 
                         line.setAttribute("stroke", tickC); line.setAttribute("stroke-width", "3"); line.setAttribute("stroke-linecap", "round");
                         line.setAttribute("transform", `rotate(${angle}, 100, 100)`); svg.appendChild(line);
                     } else {
-                        const dot = document.createElementNS(svgNS, "circle");
+                        const dot = activeDocument.createElementNS(svgNS, "circle");
                         dot.setAttribute("cx", (100 + 93 * Math.cos(rad)).toString()); dot.setAttribute("cy", (100 + 93 * Math.sin(rad)).toString());
                         dot.setAttribute("r", "1.5"); dot.setAttribute("fill", tickSec); svg.appendChild(dot);
                     }
                 } else if (outerRing === 'numbers') {
                     if (isHour) {
                         const numText = i === 0 ? "60" : padZero(i / (segments/12) * 5);
-                        const text = document.createElementNS(svgNS, "text");
+                        const text = activeDocument.createElementNS(svgNS, "text");
                         text.setAttribute("x", (100 + 93 * Math.cos(rad)).toString()); text.setAttribute("y", (100 + 93 * Math.sin(rad)).toString());
-                        text.classList.add("meridian-svg-text", "outer-number"); text.style.fill = numC; text.textContent = numText;
+                        text.classList.add("meridian-svg-text", "outer-number"); text.setAttribute("fill", numC); text.textContent = numText;
                         svg.appendChild(text);
                     } else {
-                        const line = document.createElementNS(svgNS, "line");
+                        const line = activeDocument.createElementNS(svgNS, "line");
                         line.setAttribute("x1", "100"); line.setAttribute("y1", "4"); line.setAttribute("x2", "100"); line.setAttribute("y2", "10");
                         line.setAttribute("stroke", tickSec); line.setAttribute("stroke-width", "1"); line.setAttribute("stroke-linecap", "round");
                         line.setAttribute("transform", `rotate(${angle}, 100, 100)`); svg.appendChild(line);
@@ -301,20 +301,20 @@ class ClockRenderer {
             for (let i = 1; i <= 12; i++) {
                 const angle = i * 30; const rad = (angle - 90) * (Math.PI / 180);
                 if (innerRing === 'ticks') {
-                    const line = document.createElementNS(svgNS, "line");
+                    const line = activeDocument.createElementNS(svgNS, "line");
                     line.setAttribute("x1", "100"); line.setAttribute("y1", "22"); line.setAttribute("x2", "100"); line.setAttribute("y2", "33"); 
                     line.setAttribute("transform", `rotate(${angle}, 100, 100)`); line.setAttribute("stroke", tickC); line.setAttribute("stroke-width", "3");
                     line.setAttribute("stroke-linecap", "round"); svg.appendChild(line);
                 } else if (innerRing === 'numbers') {
-                    const text = document.createElementNS(svgNS, "text");
+                    const text = activeDocument.createElementNS(svgNS, "text");
                     text.setAttribute("x", (100 + 75 * Math.cos(rad)).toString()); text.setAttribute("y", (100 + 75 * Math.sin(rad)).toString());
-                    text.classList.add("meridian-svg-text", "inner-number"); text.style.fill = numC; text.textContent = String(i); svg.appendChild(text);
+                    text.classList.add("meridian-svg-text", "inner-number"); text.setAttribute("fill", numC); text.textContent = String(i); svg.appendChild(text);
                 }
             }
         }
 
         if (showDate) {
-            const dateText = document.createElementNS(svgNS, "text");
+            const dateText = activeDocument.createElementNS(svgNS, "text");
             dateText.setAttribute("x", "136"); dateText.setAttribute("y", "100");
             dateText.classList.add("meridian-svg-text", "meridian-date-text");
             dateText.setAttribute("fill", accent); dateText.setAttribute("id", "meridian-date-el"); svg.appendChild(dateText);
@@ -324,11 +324,11 @@ class ClockRenderer {
 
     static createHandGroup(tipY: number, baseY: number, stemY: number, weight: number, color: string): SVGGElement {
         const svgNS = "http://www.w3.org/2000/svg";
-        const group = document.createElementNS(svgNS, "g");
-        const stem = document.createElementNS(svgNS, "line");
+        const group = activeDocument.createElementNS(svgNS, "g");
+        const stem = activeDocument.createElementNS(svgNS, "line");
         stem.setAttribute("x1", "100"); stem.setAttribute("y1", stemY.toString()); stem.setAttribute("x2", "100"); stem.setAttribute("y2", baseY.toString());
         stem.setAttribute("stroke", "#777777"); stem.setAttribute("stroke-width", "3"); group.appendChild(stem);
-        const body = document.createElementNS(svgNS, "line");
+        const body = activeDocument.createElementNS(svgNS, "line");
         body.setAttribute("x1", "100"); body.setAttribute("y1", baseY.toString()); body.setAttribute("x2", "100"); body.setAttribute("y2", tipY.toString());
         body.setAttribute("stroke", color); body.setAttribute("stroke-width", weight.toString()); body.setAttribute("stroke-linecap", "round"); group.appendChild(body);
         return group;
@@ -336,30 +336,34 @@ class ClockRenderer {
 
     static createSecondHand(tipY: number, color: string, tailY: number = 120): SVGLineElement {
         const svgNS = "http://www.w3.org/2000/svg";
-        const hand = document.createElementNS(svgNS, "line");
+        const hand = activeDocument.createElementNS(svgNS, "line");
         hand.setAttribute("x1", "100"); hand.setAttribute("y1", tailY.toString()); hand.setAttribute("x2", "100"); hand.setAttribute("y2", tipY.toString());
         hand.setAttribute("stroke", color); hand.setAttribute("stroke-width", "2"); hand.setAttribute("stroke-linecap", "round"); return hand;
     }
 
     static buildStaticMiniPreview(settings: Partial<MeridianSettings>): HTMLElement {
-        const wrapper = document.createElement("div");
-        wrapper.style.width = "100%"; wrapper.style.height = "100%";
+        const wrapper = activeDocument.createElement("div");
+        wrapper.style.setProperty("width", "100%"); wrapper.style.setProperty("height", "100%");
 
         if (settings.clockFace === 'digital') {
             const timeCol = this.getRealColor(settings, 'digiTime');
             const secCol = this.getRealColor(settings, 'digiSec');
             
             const face = wrapper.createEl('div', { cls: 'meridian-digital-face' });
-            face.style.fontFamily = settings.digitalFont || "'Inter', sans-serif";
+            face.style.setProperty("font-family", settings.digitalFont || "'Inter', sans-serif");
             
             const dt = face.createEl('div', { cls: 'meridian-digital-time' });
-            dt.style.fontSize = settings.digitalSecSize === 'large' ? '18px' : '22px'; 
+            dt.style.setProperty("font-size", settings.digitalSecSize === 'large' ? '18px' : '22px'); 
             
             const secStyle = settings.digitalSecSize === 'large' 
                 ? `font-size: 1em; margin-left: 2px; font-weight: inherit; color: ${secCol};`
                 : `font-size: 0.4em; margin-left: 2px; font-weight: 700; color: ${secCol}; opacity: 0.9;`;
-            const secHTML = settings.digitalSeconds === 'hidden' ? '' : `<span style="${secStyle}">30</span>`;
-            dt.innerHTML = `<span style="color: ${timeCol}">10:09</span>${secHTML}`;
+            
+            dt.empty();
+            dt.createSpan({ text: "10:09", attr: { style: `color: ${timeCol}` } });
+            if (settings.digitalSecSize !== 'hidden') {
+                dt.createSpan({ text: "30", attr: { style: secStyle } });
+            }
             
             return wrapper;
         }
@@ -382,7 +386,7 @@ class ClockRenderer {
             const sHand = this.createSecondHand(6, accent, 120); 
             sHand.setAttribute("transform", `rotate(${sDeg}, 100, 100)`); svg.appendChild(sHand); 
         }
-        const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        const dot = activeDocument.createElementNS("http://www.w3.org/2000/svg", "circle");
         dot.setAttribute("cx", "100"); dot.setAttribute("cy", "100"); dot.setAttribute("r", "5"); dot.setAttribute("fill", accent);
         svg.appendChild(dot);
         const dateEl = svg.querySelector("#meridian-date-el");
@@ -407,7 +411,7 @@ class MeridianView extends ItemView {
     public forceRebuild() { this.renderInterface(); } async onOpen() { this.renderInterface(); }
 
     private renderInterface() {
-        if (this.animationFrameId !== null) cancelAnimationFrame(this.animationFrameId);
+        if (this.animationFrameId !== null) window.cancelAnimationFrame(this.animationFrameId);
         this.activeAnalog = []; this.activeDigital = [];
         const container = this.containerEl.children[1] as HTMLElement; 
         if (!container) return;
@@ -415,8 +419,8 @@ class MeridianView extends ItemView {
         
         const wrapper = container.createEl("div", { cls: "meridian-clock-wrapper" });
         const { isWorldClock, cityIds } = this.plugin.settings;
-        if (isWorldClock) { wrapper.classList.add("meridian-world-clock-grid"); for (let i = 0; i < 4; i++) this.buildSingleClock(wrapper, cityIds[i], true); } 
-        else { this.buildSingleClock(wrapper, cityIds[0], false); }
+        if (isWorldClock) { wrapper.classList.add("meridian-world-clock-grid"); for (let i = 0; i < 4; i++) this.buildSingleClock(wrapper, cityIds[i] as string, true); } 
+        else { this.buildSingleClock(wrapper, cityIds[0] as string, false); }
         this.startEngine();
     }
 
@@ -438,7 +442,7 @@ class MeridianView extends ItemView {
             let sHand: SVGLineElement | undefined;
             svg.append(hHand, mHand);
             if (this.plugin.settings.secondHandMode !== 'hidden') { sHand = ClockRenderer.createSecondHand(6, accent, 120); svg.appendChild(sHand); }
-            const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            const dot = activeDocument.createElementNS("http://www.w3.org/2000/svg", "circle");
             dot.setAttribute("cx", "100"); dot.setAttribute("cy", "100"); dot.setAttribute("r", "5"); dot.setAttribute("fill", accent); 
             svg.appendChild(dot);
             itemBox.appendChild(svg);
@@ -446,7 +450,7 @@ class MeridianView extends ItemView {
             this.activeAnalog.push({ h: hHand, m: mHand, s: sHand, dateEl: dateEl, tz: cityInfo.tz });
         } else {
             const digitalBox = itemBox.createEl("div", { cls: "meridian-digital-face" });
-            digitalBox.style.fontFamily = this.plugin.settings.digitalFont;
+            digitalBox.style.setProperty("font-family", this.plugin.settings.digitalFont);
             const timeText = digitalBox.createEl("div", { cls: "meridian-digital-time" });
             this.activeDigital.push({ el: timeText, tz: cityInfo.tz });
         }
@@ -479,14 +483,18 @@ class MeridianView extends ItemView {
             for (const item of this.activeDigital) {
                 const { h, m, s } = TimeEngine.getTimeParts(item.tz, now);
                 const hh = padZero(h); const mm = padZero(m); const ss = padZero(s);
-                const secHTML = this.plugin.settings.digitalSeconds === 'hidden' ? '' : `<span style="${secStyle}">${ss}</span>`;
-                item.el.innerHTML = `<span style="color: ${timeCol}">${hh}:${mm}</span>${secHTML}`;
+                
+                item.el.empty();
+                item.el.createSpan({ text: `${hh}:${mm}`, attr: { style: `color: ${timeCol}` } });
+                if (this.plugin.settings.digitalSecSize !== 'hidden') {
+                    item.el.createSpan({ text: ss, attr: { style: secStyle } });
+                }
             }
-            this.animationFrameId = requestAnimationFrame(tick);
+            this.animationFrameId = window.requestAnimationFrame(tick);
         };
         tick();
     }
-    async onClose() { if (this.animationFrameId !== null) cancelAnimationFrame(this.animationFrameId); }
+    async onClose() { if (this.animationFrameId !== null) window.cancelAnimationFrame(this.animationFrameId); }
 }
 
 // =================================================================
@@ -501,7 +509,7 @@ class TimezoneSuggestModal extends FuzzySuggestModal<string> {
         this.setPlaceholder(TEXTS[plugin.settings.language].modalTzDesc); 
         this.limit = 1000; // 突破 Obsidian 默认 100 条渲染限制，直接渲染全球时区！
     }
-    getItems() { return Intl.supportedValuesOf('timeZone'); } 
+    getItems() { return (Intl as any).supportedValuesOf('timeZone'); } 
     getItemText(tz: string) { 
         return this.plugin.settings.language === 'zh' ? getTzDisplayName(tz, 'zh') : tz.replace(/_/g, ' '); 
     }
@@ -529,9 +537,9 @@ class PresetNameModal extends Modal {
     onOpen() {
         const { contentEl } = this; 
         const t = TEXTS[this.plugin.settings.language];
-        contentEl.createEl('h2', { text: t.saveModalTitle });
+        new Setting(contentEl).setName(t.saveModalTitle as string).setHeading();
         const input = contentEl.createEl('input', { type: 'text', placeholder: t.saveInput });
-        input.style.width = '100%'; input.style.marginBottom = '10px';
+        input.style.setProperty("width", "100%"); input.style.setProperty("margin-bottom", "10px");
         const btn = contentEl.createEl('button', { text: t.btnSave, cls: 'mod-cta' });
         btn.onclick = () => { this.onSubmit(input.value || 'My Preset'); this.close(); };
     }
@@ -544,13 +552,13 @@ class CustomCityModal extends Modal {
     onOpen() {
         const { contentEl } = this;
         const t = TEXTS[this.plugin.settings.language];
-        contentEl.createEl('h2', { text: t.addCityModalTitle });
+        new Setting(contentEl).setName(t.addCityModalTitle as string).setHeading();
         
         let enName = '', zhName = '';
         new Setting(contentEl).setName(t.modalEnName).addText(text => text.setPlaceholder("e.g. My Hometown").onChange(v => enName = v));
         new Setting(contentEl).setName(t.modalZhName).addText(text => text.setPlaceholder(t.phZh).onChange(v => zhName = v));
         
-        const allZones = Intl.supportedValuesOf('timeZone');
+        const allZones = (Intl as any).supportedValuesOf('timeZone');
         let selectedTz = allZones.includes('Asia/Shanghai') ? 'Asia/Shanghai' : allZones[0];
         
         const tzSetting = new Setting(contentEl).setName(t.modalTz).setDesc(t.modalTzDesc);
@@ -578,10 +586,10 @@ export default class MeridianPlugin extends Plugin {
         await this.loadSettings();
         this.registerView(VIEW_TYPE_MERIDIAN, (leaf) => new MeridianView(leaf, this));
         this.addSettingTab(new MeridianSettingTab(this.app, this));
-        this.addCommand({ id: 'open-meridian-clock', name: 'Open Meridian Clock', callback: () => this.activateView() });
+        this.addCommand({ id: 'open', name: 'Open clock', callback: () => this.activateView() });
         this.app.workspace.onLayoutReady(() => { this.activateView(); });
     }
-    async onunload() { this.app.workspace.detachLeavesOfType(VIEW_TYPE_MERIDIAN); }
+    async onunload() { }
     async activateView() {
         const { workspace } = this.app; let leaf = workspace.getLeavesOfType(VIEW_TYPE_MERIDIAN)[0];
         if (!leaf) { leaf = workspace.getRightLeaf(false) as WorkspaceLeaf | undefined; if (leaf) await leaf.setViewState({ type: VIEW_TYPE_MERIDIAN, active: true }); }
@@ -607,7 +615,7 @@ class MeridianSettingTab extends PluginSettingTab {
     private tabStates: Record<string, boolean> = { official: false, collection: false, lang: false, color: false, geo: false, hands: false, tz: false, digiColor: false, digiFont: false, customCities: false };
 
     constructor(app: App, plugin: MeridianPlugin) { super(app, plugin); this.plugin = plugin; }
-    hide() { if (this.previewFrameId !== null) cancelAnimationFrame(this.previewFrameId); }
+    hide() { if (this.previewFrameId !== null) window.cancelAnimationFrame(this.previewFrameId); }
 
     createDetails(container: HTMLElement, title: string, id: string): HTMLElement {
         const d = container.createEl('details', { cls: 'meridian-details' });
@@ -622,7 +630,7 @@ class MeridianSettingTab extends PluginSettingTab {
         const t = TEXTS[this.plugin.settings.language]; 
         const isAnalog = this.plugin.settings.clockFace === 'analog';
 
-        containerEl.createEl('h2', { text: t.settingsTitle as string });
+        new Setting(containerEl).setName(t.settingsTitle as string).setHeading();
         
         const tabsContainer = containerEl.createEl('div', { cls: 'meridian-face-tabs' });
         const tabAnalog = tabsContainer.createEl('div', { cls: `meridian-face-tab ${isAnalog ? 'is-active' : ''}`, text: t.tabAnalog as string });
@@ -642,7 +650,7 @@ class MeridianSettingTab extends PluginSettingTab {
         const secCollection = this.createDetails(containerEl, t.secCollection as string, 'collection'); 
         const collectionGrid = secCollection.createEl('div', { cls: 'meridian-gallery' });
         const myPresets = this.plugin.settings.userPresets.filter(p => p.visuals.clockFace === this.plugin.settings.clockFace);
-        if (myPresets.length === 0) collectionGrid.createEl('div', { text: t.emptyCollection as string, style: 'color: var(--text-muted); font-size: 0.85em;' });
+        if (myPresets.length === 0) collectionGrid.createEl('div', { text: t.emptyCollection as string, attr: { style: 'color: var(--text-muted); font-size: 0.85em;' } });
         else myPresets.forEach(preset => this.renderPresetCard(collectionGrid, preset));
         
         new Setting(secCollection).addButton(btn => btn.setButtonText(t.btnSavePreset as string).setCta().onClick(() => {
@@ -716,7 +724,7 @@ class MeridianSettingTab extends PluginSettingTab {
             const fontList = FONTS[this.plugin.settings.language] as Array<any>;
             fontList.forEach(font => {
                 const card = fontGrid.createEl('div', { cls: `meridian-font-card ${this.plugin.settings.digitalFont === font.id ? 'is-active' : ''}` });
-                card.style.fontFamily = font.id;
+                card.style.setProperty("font-family", font.id);
                 card.createEl('div', { text: '10:09' });
                 card.createEl('div', { cls: 'meridian-font-label', text: font.name });
                 card.onclick = async () => { this.plugin.settings.digitalFont = font.id; await this.plugin.saveSettings(); this.display(); };
@@ -727,7 +735,7 @@ class MeridianSettingTab extends PluginSettingTab {
         new Setting(secTz).setName(t.worldClock as string).addToggle(toggle => toggle.setValue(this.plugin.settings.isWorldClock).onChange(async (v) => { this.plugin.settings.isWorldClock = v; await this.plugin.saveSettings(); this.display(); }));
         const tzCount = this.plugin.settings.isWorldClock ? 4 : 1;
         for (let i = 0; i < tzCount; i++) {
-            const cityInfo = getCityById(this.plugin.settings.cityIds[i], this.plugin.settings.customCities);
+            const cityInfo = getCityById(this.plugin.settings.cityIds[i] as string, this.plugin.settings.customCities);
             const displayName = this.plugin.settings.language === 'zh' ? cityInfo.zh : cityInfo.en;
             new Setting(secTz).setName(this.plugin.settings.isWorldClock ? `${t.tzWorld} ${i + 1}` : (t.tzMain as string)).addButton(btn => btn.setButtonText(t.btnSearch as string).setCta().onClick(() => { new CitySuggestModal(this.app, this.plugin, async (selectedCity) => { this.plugin.settings.cityIds[i] = selectedCity.id; await this.plugin.saveSettings(); this.display(); }).open(); })).addText(text => text.setValue(displayName).setDisabled(true));
         }
@@ -743,7 +751,7 @@ class MeridianSettingTab extends PluginSettingTab {
 
         const cList = secCustomCity.createEl('div', { cls: 'meridian-city-list' });
         if (!this.plugin.settings.customCities || this.plugin.settings.customCities.length === 0) {
-            cList.createEl('div', { text: t.customCityEmpty as string, style: 'color: var(--text-muted); font-size: 0.85em; text-align: center; padding: 10px;' });
+            cList.createEl('div', { text: t.customCityEmpty as string, attr: { style: 'color: var(--text-muted); font-size: 0.85em; text-align: center; padding: 10px;' } });
         } else {
             this.plugin.settings.customCities.forEach(city => {
                 const row = cList.createEl('div', { cls: 'meridian-city-row' });
@@ -781,7 +789,7 @@ class MeridianSettingTab extends PluginSettingTab {
     }
 
     private buildPreview(container: HTMLElement) {
-        if (this.previewFrameId !== null) cancelAnimationFrame(this.previewFrameId);
+        if (this.previewFrameId !== null) window.cancelAnimationFrame(this.previewFrameId);
         container.empty();
         
         if (this.plugin.settings.clockFace === 'analog') {
@@ -798,7 +806,7 @@ class MeridianSettingTab extends PluginSettingTab {
             let sHand: SVGLineElement | undefined;
             svg.append(hHand, mHand);
             if (this.plugin.settings.secondHandMode !== 'hidden') { sHand = ClockRenderer.createSecondHand(6, accent, 120); svg.appendChild(sHand); }
-            const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            const dot = activeDocument.createElementNS("http://www.w3.org/2000/svg", "circle");
             dot.setAttribute("cx", "100"); dot.setAttribute("cy", "100"); dot.setAttribute("r", "5"); dot.setAttribute("fill", accent);
             svg.appendChild(dot);
             container.appendChild(svg);
@@ -807,7 +815,7 @@ class MeridianSettingTab extends PluginSettingTab {
             this.previewDigitalEl = null;
         } else {
             const digitalBox = container.createEl("div", { cls: "meridian-digital-face" });
-            digitalBox.style.fontFamily = this.plugin.settings.digitalFont;
+            digitalBox.style.setProperty("font-family", this.plugin.settings.digitalFont);
             this.previewDigitalEl = digitalBox.createEl("div", { cls: "meridian-digital-time" });
             this.previewActiveHands = null;
         }
@@ -830,10 +838,14 @@ class MeridianSettingTab extends PluginSettingTab {
                     : `font-size: 0.4em; margin-left: 6px; font-weight: 700; color: ${secCol}; opacity: 0.9;`;
                 
                 const hh = padZero(now.getHours()); const mm = padZero(now.getMinutes()); const ss = padZero(now.getSeconds());
-                const secHTML = this.plugin.settings.digitalSeconds === 'hidden' ? '' : `<span style="${secStyle}">${ss}</span>`;
-                this.previewDigitalEl.innerHTML = `<span style="color: ${timeCol}">${hh}:${mm}</span>${secHTML}`;
+                
+                this.previewDigitalEl.empty();
+                this.previewDigitalEl.createSpan({ text: `${hh}:${mm}`, attr: { style: `color: ${timeCol}` } });
+                if (this.plugin.settings.digitalSecSize !== 'hidden') {
+                    this.previewDigitalEl.createSpan({ text: ss, attr: { style: secStyle } });
+                }
             }
-            this.previewFrameId = requestAnimationFrame(tick);
+            this.previewFrameId = window.requestAnimationFrame(tick);
         };
         tick();
     }
