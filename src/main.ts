@@ -84,7 +84,7 @@ const CITY_DB: CityDef[] = [
     { id: "mecca", en: "Mecca", zh: "麦加", tz: "Asia/Riyadh" }, { id: "doha", en: "Doha", zh: "多哈", tz: "Asia/Qatar" }, { id: "kuwait", en: "Kuwait City", zh: "科威特城", tz: "Asia/Kuwait" }, { id: "manama", en: "Manama", zh: "麦纳麦", tz: "Asia/Bahrain" },
     { id: "muscat", en: "Muscat", zh: "马斯喀特", tz: "Asia/Muscat" }, { id: "tehran", en: "Tehran", zh: "德黑兰", tz: "Asia/Tehran" }, { id: "baghdad", en: "Baghdad", zh: "巴格达", tz: "Asia/Baghdad" }, { id: "damascus", en: "Damascus", zh: "大马士革", tz: "Asia/Damascus" },
     { id: "amman", en: "Amman", zh: "安曼", tz: "Asia/Damascus" }, { id: "beirut", en: "Beirut", zh: "贝鲁特", tz: "Asia/Beirut" }, { id: "telaviv", en: "Tel Aviv", zh: "特拉维夫", tz: "Asia/Jerusalem" }, { id: "jerusalem", en: "Jerusalem", zh: "耶路撒冷", tz: "Asia/Jerusalem" },
-    { id: "tashkent", en: "Tashkent", zh: "塔什干", tz: "Asia/Tashkent" }, { id: "almaty", en: "Almaty", zh: "阿拉木图", tz: "Asia/Almaty" }, { id: "astana", en: "Astana", zh: "阿斯塔纳", tz: "Asia/Almaty" }, { id: "bishkek", en: "Bishkek", zh: "比什凯克", tz: "Asia/Bishkek" },
+    { id: "tashkent", Jessen: "Tashkent", zh: "塔什干", tz: "Asia/Tashkent" }, { id: "almaty", en: "Almaty", zh: "阿拉木图", tz: "Asia/Almaty" }, { id: "astana", en: "Astana", zh: "阿斯塔纳", tz: "Asia/Almaty" }, { id: "bishkek", en: "Bishkek", zh: "比什凯克", tz: "Asia/Bishkek" },
     { id: "dushanbe", en: "Dushanbe", zh: "杜尚别", tz: "Asia/Dushanbe" }, { id: "ashgabat", en: "Ashgabat", zh: "阿什哈巴德", tz: "Asia/Ashgabat" }, { id: "kabul", en: "Kabul", zh: "喀布尔", tz: "Asia/Kabul" },
     { id: "london", en: "London", zh: "伦敦", tz: "Europe/London" }, { id: "manchester", en: "Manchester", zh: "曼彻斯特", tz: "Europe/London" }, { id: "birmingham", en: "Birmingham", zh: "伯明翰", tz: "Europe/London" }, { id: "edinburgh", en: "Edinburgh", zh: "爱丁堡", tz: "Europe/London" },
     { id: "glasgow", en: "Glasgow", zh: "格拉斯哥", tz: "Europe/London" }, { id: "dublin", en: "Dublin", zh: "都柏林", tz: "Europe/Dublin" }, { id: "paris", en: "Paris", zh: "巴黎", tz: "Europe/Paris" }, { id: "marseille", en: "Marseille", zh: "马赛", tz: "Europe/Paris" },
@@ -105,7 +105,7 @@ const CITY_DB: CityDef[] = [
     { id: "phoenix", en: "Phoenix", zh: "凤凰城", tz: "America/Phoenix" }, { id: "saltlakecity", en: "Salt Lake City", zh: "盐湖城", tz: "America/Denver" }, { id: "losangeles", en: "Los Angeles", zh: "洛杉矶", tz: "America/Los_Angeles" }, { id: "sanfrancisco", en: "San Francisco", zh: "旧金山", tz: "America/Los_Angeles" },
     { id: "sandiego", en: "San Diego", zh: "圣地亚哥(美)", tz: "America/Los_Angeles" }, { id: "lasvegas", en: "Las Vegas", zh: "拉斯维加斯", tz: "America/Los_Angeles" }, { id: "seattle", en: "Seattle", zh: "西雅图", tz: "America/Los_Angeles" }, { id: "portland", en: "Portland", zh: "波特兰", tz: "America/Los_Angeles" },
     { id: "anchorage", en: "Anchorage", zh: "安克雷奇", tz: "America/Anchorage" }, { id: "honolulu", en: "Honolulu", zh: "檀香山", tz: "Pacific/Honolulu" }, { id: "toronto", en: "Toronto", zh: "多伦多", tz: "America/Toronto" }, { id: "montreal", en: "Montreal", zh: "蒙特利尔", tz: "America/Toronto" },
-    { id: "vancouver", en: "Vancouver", zh: "温哥华", tz: "America/Vancouver" }, { id: "calgary", en: "Calgary", zh: "卡尔加里", tz: "America/Edmonton" }, { id: "ottawa", en: "Ottawa", zh: "渥太华", tz: "America/Toronto" }, { id: "quebec", en: "Quebec", zh: "魁北克", tz: "America/Toronto" },
+    { id: "vancouver", en: "Vancouver", zh: "温哥华", tz: "America/Vancouver" }, { id: "calgary", en: "Calgary", zh: "卡尔加里", tz: "America/Edmonton" }, { id: "ottawa", en: "Ottawa", zh: "渥太华", tz: "America/Toronto" }, { id: "quebec", en: "Quebec", zh: "魁克", tz: "America/Toronto" },
     { id: "mexicocity", en: "Mexico City", zh: "墨西哥城", tz: "America/Mexico_City" }, { id: "cancun", en: "Cancun", zh: "坎昆", tz: "America/Cancun" }, { id: "guadalajara", en: "Guadalajara", zh: "瓜达拉哈拉", tz: "America/Mexico_City" }, { id: "monterrey", en: "Monterrey", zh: "蒙特雷", tz: "America/Monterrey" },
     { id: "havana", en: "Havana", zh: "哈瓦那", tz: "America/Havana" }, { id: "kingston", en: "Kingston", zh: "金斯敦", tz: "America/Jamaica" },
     { id: "saopaulo", en: "Sao Paulo", zh: "圣保罗", tz: "America/Sao_Paulo" }, { id: "riodejaneiro", en: "Rio de Janeiro", zh: "里约热内卢", tz: "America/Sao_Paulo" }, { id: "brasilia", en: "Brasilia", zh: "巴西利亚", tz: "America/Sao_Paulo" }, { id: "buenosaires", en: "Buenos Aires", zh: "布宜诺斯艾利斯", tz: "America/Argentina/Buenos_Aires" },
@@ -122,17 +122,17 @@ const CITY_DB: CityDef[] = [
 ];
 function getCityById(id: string, customCities: CityDef[] = []): CityDef { const f = [...CITY_DB, ...customCities].find(c => c.id === id); return f || CITY_DB[0]; }
 
-const TZ_ZH_MAP: Record<string, string> = { "Abidjan":"阿比让","Accra":"阿克拉","Algiers":"阿尔及尔","Bissau":"比绍","Cairo":"开罗","Casablanca":"卡萨布兰卡","Ceuta":"休达","El_Aaiun":"阿尤恩","Johannesburg":"约翰内斯堡","Juba":"朱巴","Khartoum":"喀土穆","Lagos":"拉各斯","Maputo":"马普托","Monrovia":"蒙罗维亚","Nairobi":"内罗毕","Ndjamena":"恩贾梅纳","Sao_Tome":"圣多美","Tripoli":"的黎波里","Tunis":"突尼斯","Windhoek":"温得和克","Adak":"埃达克","Anchorage":"安克雷奇","Anguilla":"安圭拉","Antigua":"安提瓜","Araguaina":"阿拉瓜伊纳","Argentina":"阿根廷","Buenos_Aires":"布宜诺斯艾利斯","Catamarca":"卡塔马卡","Cordoba":"科尔多瓦","Jujuy":"胡胡伊","La_Rioja":"拉里奥哈","Mendoza":"门多萨","Rio_Gallegos":"里奥加耶戈斯","Salta":"萨尔塔","San_Juan":"圣胡安","San_Luis":"圣路易斯","Tucuman":"图库曼","Ushuaia":"乌斯怀亚","Aruba":"阿鲁巴","Asuncion":"亚松森","Bahia":"巴伊亚","Bahia_Banderas":"巴伊亚班德拉斯","Barbados":"巴巴多斯","Belize":"伯利兹","Blanc-Sablon":"布朗萨布隆","Boa_Vista":"博阿维斯塔","Bogota":"波哥大","Boise":"博伊西","Cuiaba":"库亚巴","Curacao":"库拉索","Danmarkshavn":"丹麦港","Dawson":"道森","Dawson_Creek":"道森克里克","Denver":"丹佛","Detroit":"底特律","Dominica":"多米尼加","Edmonton":"埃德蒙顿","Eirunepe":"埃鲁内佩","El_Salvador":"萨尔瓦多","Fort_Nelson":"纳尔逊堡","Fortaleza":"福塔莱萨","Glace_Bay":"格莱斯湾","Godthab":"戈特霍布","Goose_Bay":"鹅湾","Grand_Turk":"大特克","Grenada":"格林纳达","Guadeloupe":"瓜德罗普","Guatemala":"危地马拉","Guayaquil":"瓜亚基尔","Guyana":"圭亚那","Halifax":"哈利法克斯","Havana":"哈瓦那","Hermosillo":"埃莫西约","Indiana":"印第安纳","Indianapolis":"印第安纳波利斯","Knox":"诺克斯","Marengo":"马伦戈","Petersburg":"彼得斯堡","Tell_City":"特尔城","Vevay":"韦韦","Vincennes":"万塞讷","Winamac":"温纳马克","Inuvik":"伊努维克","Iqaluit":"伊卡卢伊特","Jamaica":"牙买加","Juneau":"朱诺","Kentucky":"肯塔基","Louisville":"路易斯维尔","Monticello":"蒙蒂塞洛","Kralendijk":"克拉伦代克","La_Paz":"拉巴斯","Lima":"利马","Los_Angeles":"洛杉矶","Lower_Princes":"下王子区","Maceio":"马塞约","Managua":"马那瓜","Manaus":"马瑙斯","Marigot":"马里戈特","Martinique":"马提尼克","Matamoros":"马塔莫罗斯","Mazatlan":"马萨特兰","Menominee":"梅诺米尼","Merida":"梅里达","Metlakatla":"梅特拉卡特拉","Mexico_City":"墨西哥城","Miquelon":"密克隆","Moncton":"蒙克顿","Monterrey":"蒙特雷","Montevideo":"蒙得维的亚","Montserrat":"蒙特塞拉特","Nassau":"拿骚","New_York":"纽约","Nipigon":"尼皮贡","Nome":"诺姆","Noronha":"诺罗尼亚","North_Dakota":"北达科他","Beulah":"比尤拉","Center":"中心城","New_Salem":"新塞勒姆","Ojinaga":"奥希纳加","Panama":"巴拿马","Pangnirtung":"庞纳图","Paramaribo":"帕拉马里博","Phoenix":"凤凰城","Port-au-Prince":"太子港","Port_of_Spain":"西班牙港","Porto_Velho":"韦柳港","Puerto_Rico":"波多黎各","Punta_Arenas":"蓬塔阿雷纳斯","Rankin_Inlet":"兰金因莱特","Recife":"累西腓","Regina":"里贾纳","Resolute":"雷索卢特","Rio_Branco":"里约布兰科","Santarem":"圣塔伦","Santiago":"圣地亚哥","Santo_Domingo":"圣多明各","Sao_Paulo":"圣保罗","Scoresbysund":"斯科斯比松","Sitka":"锡特卡","St_Barthelemy":"圣巴泰勒米","St_Johns":"圣约翰","St_Kitts":"圣基茨","St_Lucia":"圣卢西亚","St_Thomas":"圣托马斯","St_Vincent":"圣文森特","Swift_Current":"斯威夫特卡伦特","Tegucigalpa":"特古西加尔巴","Thule":"图勒","Thunder_Bay":"桑德贝","Tijuana":"蒂华纳","Toronto":"多伦多","Tortola":"托尔托拉","Vancouver":"温哥华","Whitehorse":"怀特霍斯","Winnipeg":"温尼伯","Yakutat":"亚库塔特","Yellowknife":"黄刀","Crestone":"克雷斯通" };
+const TZ_ZH_MAP: Record<string, string> = { "Abidjan":"阿比让","Accra":"阿克拉","Algiers":"阿尔及尔","Bissau":"比绍","Cairo":"开罗","Casablanca":"卡萨布兰卡","Ceuta":"休达","El_Aaiun":"阿尤恩","Johannesburg":"约翰内斯堡","Juba":"朱巴","Khartoum":"喀土穆","Lagos":"拉各斯","Maputo":"马普托","Monrovia":"幕","Nairobi":"内罗毕","Ndjamena":"恩贾梅纳","Sao_Tome":"圣多美","Tripoli":"的黎波里","Tunis":"突尼斯","Windhoek":"温得和克","Adak":"埃达克","Anchorage":"安克雷奇","Anguilla":"安圭拉","Antigua":"安提瓜","Araguaina":"阿拉瓜伊纳","Argentina":"阿根廷","Buenos_Aires":"布宜诺斯艾利斯","Catamarca":"卡塔马卡","Cordoba":"科尔多瓦","Jujuy":"胡胡伊","La_Rioja":"拉里奥哈","Mendoza":"门多萨","Rio_Gallegos":"里奥加耶戈斯","Salta":"萨尔塔","San_Juan":"圣胡安","San_Luis":"圣路易斯","Tucuman":"图库曼","Ushuaia":"乌斯怀亚","Aruba":"阿鲁巴","Asuncion":"亚松森","Bahia":"巴伊亚","Bahia_Banderas":"巴伊亚班德拉斯","Barbados":"巴巴多斯","Belize":"伯利兹","Blanc-Sablon":"布朗萨布隆","Boa_Vista":"博阿维斯塔","Bogota":"波哥大","Boise":"博伊西","Cuiaba":"库亚巴","Curacao":"库拉索","Danmarkshavn":"丹麦港","Dawson":"道森","Dawson_Creek":"道森克里克","Denver":"丹佛","Detroit":"底特律","Dominica":"多米尼加","Edmonton":"埃德门顿","Eirunepe":"埃鲁内佩","El_Salvador":"萨尔瓦多","Fort_Nelson":"纳尔逊堡","Fortaleza":"福塔莱萨","Glace_Bay":"格莱斯湾","Godthab":"戈特霍布","Goose_Bay":"鹅湾","Grand_Turk":"大特克","Grenada":"格林纳达","Guadeloupe":"瓜德罗普","Guatemala":"危地马拉","Guayaquil":"瓜亚基尔","Guyana":"圭亚那","Halifax":"哈利法克斯","Havana":"哈瓦那","Hermosillo":"埃莫西约","Indiana":"印第安纳","Indianapolis":"印第安纳波利斯","Knox":"诺克斯","Marengo":"马伦戈","Petersburg":"彼得斯堡","Tell_City":"特尔城","Vevay":"韦韦","Vincennes":"万塞讷","Winamac":"温纳马克","Inuvik":"伊努维克","Iqaluit":"伊卡卢伊特","Jamaica":"牙买加","Juneau":"朱诺","Kentucky":"肯塔基","Louisville":"路易斯维尔","Monticello":"蒙蒂塞洛","Kralendijk":"克拉伦代克","La_Paz":"拉巴斯","Lima":"利马","Los_Angeles":"洛杉矶","Lower_Princes":"下王子区","Maceio":"马塞约","Managua":"马那瓜","Manaus":"马瑙斯","Marigot":"马里戈特","Martinique":"马提尼克","Matamoros":"马塔莫罗斯","Mazatlan":"马萨特兰","Menominee":"梅诺米尼","Merida":"梅里达","Metlakatla":"梅特拉卡特拉","Mexico_City":"墨西哥城","Miquelon":"密克隆","Moncton":"蒙克顿","Monterrey":"蒙特雷","Montevideo":"蒙得维的亚","Montserrat":"蒙特塞拉特","Nassau":"拿骚","New_York":"纽约","Nipigon":"尼皮贡","Nome":"诺姆","Noronha":"诺罗尼亚","North_Dakota":"北达科他","Beulah":"比尤拉","Center":"中心城","New_Salem":"新塞勒姆","Ojinaga":"奥希纳加","Panama":"巴拿马","Pangnirtung":"庞纳图","Paramaribo":"帕拉马里博","Phoenix":"凤凰城","Port-au-Prince":"太子港","Port_of_Spain":"西班牙港","Porto_Velho":"韦柳港","Puerto_Rico":"波多黎各","Punta_Arenas":"蓬塔阿雷纳斯","Rankin_Inlet":"兰金因莱特","Recife":"累西腓","Regina":"里贾纳","Resolute":"雷索卢特","Rio_Branco":"里约布兰科","Santarem":"圣塔伦","Santiago":"圣地亚哥","Santo_Domingo":"圣多明各","Sao_Paulo":"圣保罗","Scoresbysund":"斯科斯比松","Sitka":"锡特卡","St_Barthelemy":"圣巴泰勒米","St_Johns":"圣约翰","St_Kitts":"圣基茨","St_Lucia":"圣卢西亚","St_Thomas":"圣托马斯","St_Vincent":"圣文森特","Swift_Current":"斯威夫特卡伦特","Tegucigalpa":"特古西加尔巴","Thule":"图勒","Thunder_Bay":"桑德贝","Tijuana":"蒂华纳","Toronto":"多伦多","Tortola":"托尔托拉","Vancouver":"温哥华","Whitehorse":"怀特霍斯","Winnipeg":"温尼伯","Yakutat":"亚库塔特","Yellowknife":"黄刀","Crestone":"克雷斯通" };
 const TZ_PREFIX: Record<string, string> = { 'Asia': '亚洲', 'Europe': '欧洲', 'America': '美洲', 'Africa': '非洲', 'Australia': '澳洲', 'Pacific': '太平洋', 'Indian': '印度洋', 'Atlantic': '大西洋', 'Antarctica': '南极洲' };
 
 function getTzDisplayName(tz: string, lang: 'en' | 'zh'): string {
     if (lang !== 'zh') return tz.replace(/_/g, ' ');
     const matched = CITY_DB.find(c => c.tz === tz);
-    if (matched && matched.zh) return `(${TZ_PREFIX[tz.split('/')[0]] || ''}) ${matched.zh}`;
+    if (matched && matched.zh) return `(${TZ_PREFIX[tz.split('/')[0] as string] || ''}) ${matched.zh}`;
     let parts = tz.split('/');
     if (parts.length === 1) return tz;
-    let prefix = TZ_PREFIX[parts[0]] || parts[0];
-    let suffix = parts[parts.length - 1];
+    let prefix = TZ_PREFIX[parts[0] as string] || parts[0];
+    let suffix = parts[parts.length - 1] as string;
     let translatedSuffix = TZ_ZH_MAP[suffix] || suffix.replace(/_/g, ' ');
     return `${prefix} / ${translatedSuffix}`;
 }
@@ -199,11 +199,11 @@ class TimeEngine {
         if (tz === 'Local') return { h: now.getHours(), m: now.getMinutes(), s: now.getSeconds(), ms, d: now.getDate() };
         try {
             const formatter = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric', day: 'numeric' });
-            const parts = (formatter as unknown as { formatToParts(d: Date): Array<{type: string, value: string}> }).formatToParts(now);
-            const getVal = (t: string) => parseInt(parts.find((p) => p.type === t)?.value || '0');
+            const parts = (formatter as any).formatToParts(now);
+            const getVal = (type: string) => parseInt(parts.find((p: any) => p.type === type)?.value || '0');
             let h = getVal('hour'); if (h === 24) h = 0;
             return { h, m: getVal('minute'), s: getVal('second'), ms, d: getVal('day') };
-        } catch { return { h: now.getHours(), m: now.getMinutes(), s: now.getSeconds(), ms, d: now.getDate() }; }
+        } catch (e) { return { h: now.getHours(), m: now.getMinutes(), s: now.getSeconds(), ms, d: now.getDate() }; }
     }
 }
 
@@ -413,8 +413,8 @@ class MeridianView extends ItemView {
         
         const wrapper = container.createEl("div", { cls: "meridian-clock-wrapper" });
         const { isWorldClock, cityIds } = this.plugin.settings;
-        if (isWorldClock) { wrapper.classList.add("meridian-world-clock-grid"); for (let i = 0; i < 4; i++) this.buildSingleClock(wrapper, cityIds[i], true); } 
-        else { this.buildSingleClock(wrapper, cityIds[0], false); }
+        if (isWorldClock) { wrapper.classList.add("meridian-world-clock-grid"); for (let i = 0; i < 4; i++) this.buildSingleClock(wrapper, cityIds[i] as string, true); } 
+        else { this.buildSingleClock(wrapper, cityIds[0] as string, false); }
         this.startEngine();
     }
 
@@ -444,7 +444,7 @@ class MeridianView extends ItemView {
             this.activeAnalog.push({ h: hHand, m: mHand, s: sHand, dateEl: dateEl, tz: cityInfo.tz });
         } else {
             const digitalBox = itemBox.createEl("div", { cls: "meridian-digital-face" });
-            digitalBox.setCssStyles({ fontFamily: this.plugin.settings.digitalFont });
+            digitalBox.style.setProperty("font-family", this.plugin.settings.digitalFont);
             const timeText = digitalBox.createEl("div", { cls: "meridian-digital-time" });
             this.activeDigital.push({ el: timeText, tz: cityInfo.tz });
         }
@@ -494,7 +494,7 @@ class MeridianView extends ItemView {
         };
         tick();
     }
-    onClose() { if (this.animationFrameId !== null) window.cancelAnimationFrame(this.animationFrameId); return Promise.resolve(); }
+    async onClose() { if (this.animationFrameId !== null) window.cancelAnimationFrame(this.animationFrameId); }
 }
 
 // =================================================================
@@ -507,7 +507,7 @@ class TimezoneSuggestModal extends FuzzySuggestModal<string> {
         this.setPlaceholder(TEXTS[plugin.settings.language].modalTzDesc); 
         this.limit = 1000; 
     }
-    getItems() { return (Intl as unknown as { supportedValuesOf(k: string): string[] }).supportedValuesOf('timeZone'); } 
+    getItems() { return (Intl as any).supportedValuesOf('timeZone'); } 
     getItemText(tz: string) { return this.plugin.settings.language === 'zh' ? getTzDisplayName(tz, 'zh') : tz.replace(/_/g, ' '); }
     onChooseItem(tz: string) { this.onChoose(tz); }
 }
@@ -554,7 +554,7 @@ class CustomCityModal extends Modal {
         new Setting(contentEl).setName(t.modalEnName).addText(text => text.setPlaceholder("e.g. My Hometown").onChange(v => enName = v));
         new Setting(contentEl).setName(t.modalZhName).addText(text => text.setPlaceholder(t.phZh).onChange(v => zhName = v));
         
-        const allZones = (Intl as unknown as { supportedValuesOf(k: string): string[] }).supportedValuesOf('timeZone');
+        const allZones = (Intl as any).supportedValuesOf('timeZone');
         let selectedTz = allZones.includes('Asia/Shanghai') ? 'Asia/Shanghai' : allZones[0];
         
         const tzSetting = new Setting(contentEl).setName(t.modalTz).setDesc(t.modalTzDesc);
@@ -581,8 +581,8 @@ export default class MeridianPlugin extends Plugin {
         await this.loadSettings();
         this.registerView(VIEW_TYPE_MERIDIAN, (leaf) => new MeridianView(leaf, this));
         this.addSettingTab(new MeridianSettingTab(this.app, this));
-        this.addCommand({ id: 'open', name: 'Open clock', callback: () => { void this.activateView(); } });
-        this.app.workspace.onLayoutReady(() => { void this.activateView(); });
+        this.addCommand({ id: 'open', name: 'Open clock', callback: () => { this.activateView().catch(err => console.error(err)); } });
+        this.app.workspace.onLayoutReady(() => { this.activateView().catch(err => console.error(err)); });
     }
     onunload() { }
     async activateView() {
@@ -602,7 +602,7 @@ export default class MeridianPlugin extends Plugin {
     async saveSettings() {
         await this.saveData(this.settings);
         const leaves = this.app.workspace.getLeavesOfType(VIEW_TYPE_MERIDIAN);
-        leaves.forEach(leaf => { if (leaf.view instanceof MeridianView) leaf.view.forceRebuild(); });
+        leaves.forEach((leaf: WorkspaceLeaf) => { if (leaf.view instanceof MeridianView) leaf.view.forceRebuild(); });
     }
 }
 
@@ -619,8 +619,8 @@ class MeridianSettingTab extends PluginSettingTab {
     constructor(app: App, plugin: MeridianPlugin) { super(app, plugin); this.plugin = plugin; }
     hide() { if (this.previewFrameId !== null) window.cancelAnimationFrame(this.previewFrameId); }
 
-    private saveAndRefresh() { void this.plugin.saveSettings().then(() => this.display()); }
-    private saveAndRefreshPreview(previewBox: HTMLElement) { void this.plugin.saveSettings().then(() => this.buildPreview(previewBox)); }
+    private saveAndRefresh() { this.plugin.saveSettings().then(() => this.display()); }
+    private saveAndRefreshPreview(previewBox: HTMLElement) { this.plugin.saveSettings().then(() => this.buildPreview(previewBox)); }
 
     createDetails(container: HTMLElement, title: string, id: string): HTMLElement {
         const d = container.createEl('details', { cls: 'meridian-details' });
@@ -760,7 +760,7 @@ class MeridianSettingTab extends PluginSettingTab {
         new Setting(secTz).setName(t.worldClock).addToggle(toggle => toggle.setValue(this.plugin.settings.isWorldClock).onChange((v) => { this.plugin.settings.isWorldClock = v; this.saveAndRefresh(); }));
         const tzCount = this.plugin.settings.isWorldClock ? 4 : 1;
         for (let i = 0; i < tzCount; i++) {
-            const cityInfo = getCityById(this.plugin.settings.cityIds[i], this.plugin.settings.customCities);
+            const cityInfo = getCityById(this.plugin.settings.cityIds[i] as string, this.plugin.settings.customCities);
             const displayName = this.plugin.settings.language === 'zh' ? cityInfo.zh : cityInfo.en;
             new Setting(secTz).setName(this.plugin.settings.isWorldClock ? `${t.tzWorld} ${i + 1}` : t.tzMain).addButton(btn => btn.setButtonText(t.btnSearch).setCta().onClick(() => { new CitySuggestModal(this.app, this.plugin, (selectedCity) => { this.plugin.settings.cityIds[i] = selectedCity.id; this.saveAndRefresh(); }).open(); })).addText(text => text.setValue(displayName).setDisabled(true));
         }
