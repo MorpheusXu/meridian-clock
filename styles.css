@@ -66,3 +66,7 @@
 .meridian-city-info { display: flex; flex-direction: column; gap: 4px; }
 .meridian-city-name { font-weight: 600; font-size: 0.9em; color: var(--text-normal); }
 .meridian-city-tz { font-size: 0.75em; font-family: monospace; color: var(--text-muted); }
+
+/* 修复静态样式拦截的专属类名 */
+.meridian-preview-wrapper { width: 100%; height: 100%; }
+.meridian-modal-input { width: 100%; margin-bottom: 10px; }

@@ -6,7 +6,7 @@ const padZero = (n: number | string) => Number(n) < 10 ? '0' + n : String(n);
 // =================================================================
 // 1. 国际化字典 & 严格中英隔离
 // =================================================================
-const TEXTS: Record<string, any> = {
+const TEXTS: Record<'en' | 'zh', Record<string, string>> = {
     en: {
         settingsTitle: "Meridian Settings", preview: "Live Preview", langName: "Language", 
         secOfficial: "✨ Official Presets", secCollection: "⭐ My Presets", btnSavePreset: "Save Current Preset", emptyCollection: "No saved presets",
@@ -21,7 +21,8 @@ const TEXTS: Record<string, any> = {
         tzMain: "Primary City", tzWorld: "World Clock Slot", btnSearch: "Search / Select...", fontTitle: "🔤 Typography", saveModalTitle: "Save Custom Preset",
         saveInput: "Enter preset name...", btnSave: "Save", btnDelete: "Delete",
         customCitiesTitle: "🌍 Custom Cities Management", btnAddCity: "Add Custom City", customCityEmpty: "No custom cities added yet.", addCityModalTitle: "Create Custom City",
-        modalEnName: "English Name", modalZhName: "Chinese Name", modalTz: "Base Timezone", modalTzDesc: "Search & select timezone", phZh: "e.g. My Hometown (ZH)"
+        modalEnName: "English Name", modalZhName: "Chinese Name", modalTz: "Base Timezone", modalTzDesc: "Search & select timezone", phZh: "e.g. My Hometown (ZH)",
+        colorCustom: "Custom Color"
     },
     zh: {
         settingsTitle: "Meridian 设置", preview: "实时预览", langName: "语言", 
@@ -41,13 +42,13 @@ const TEXTS: Record<string, any> = {
     }
 };
 
-const COLOR_OPTIONS: Record<string, any> = {
+const COLOR_OPTIONS: Record<string, Record<'en' | 'zh', Record<string, string>>> = {
     accent: { en: { '#FF9500': 'Hermès Orange', '#FF3B30': 'Product RED', '#CCFF00': 'Volt Yellow', '#00F5D4': 'Mint Green', '#007AFF': 'Ocean Blue', '#FFFFFF': 'Pure White', 'custom': 'Custom...' }, zh: { '#FF9500': '爱马仕橙', '#FF3B30': '经典红', '#CCFF00': '荧光黄', '#00F5D4': '薄荷绿', '#007AFF': '深海蓝', '#FFFFFF': '纯白', 'custom': '自定义...' } },
     bg: { en: { 'none': 'Transparent', '#798071': 'Sage Green', '#1C2833': 'Navy Blue', '#4A2323': 'Deep Maroon', '#F2F2F7': 'Silver White', '#0A0A0A': 'Deep Black', 'custom': 'Custom...' }, zh: { 'none': '透明', '#798071': '灰绿', '#1C2833': '深蓝', '#4A2323': '酒红', '#F2F2F7': '银白', '#0A0A0A': '深黑', 'custom': '自定义...' } },
     generic: { en: { 'default': 'Theme Adaptive', '#FFFFFF': 'Pure White', '#000000': 'Pure Black', '#FF9500': 'Orange', '#FF3B30': 'Red', '#888888': 'Gray', 'custom': 'Custom...' }, zh: { 'default': '自适应主题', '#FFFFFF': '纯白', '#000000': '纯黑', '#FF9500': '橙色', '#FF3B30': '红色', '#888888': '灰色', 'custom': '自定义...' } }
 };
 
-const FONTS: Record<string, any> = {
+const FONTS: Record<'en' | 'zh', Array<{id: string, name: string}>> = {
     en: [ { id: "'Inter', sans-serif", name: "Modern" }, { id: "'Courier New', monospace", name: "Terminal" }, { id: "Impact, sans-serif", name: "Bold" }, { id: "'Times New Roman', serif", name: "Classic" } ],
     zh: [ { id: "'Inter', sans-serif", name: "现代" }, { id: "'Courier New', monospace", name: "终端" }, { id: "Impact, sans-serif", name: "粗体" }, { id: "'Times New Roman', serif", name: "经典" } ]
 };
@@ -119,7 +120,7 @@ const CITY_DB: CityDef[] = [
     { id: "dakar", en: "Dakar", zh: "达喀尔", tz: "Africa/Dakar" }, { id: "accra", en: "Accra", zh: "阿克拉", tz: "Africa/Accra" }, { id: "khartoum", en: "Khartoum", zh: "喀土穆", tz: "Africa/Khartoum" }, { id: "kinshasa", en: "Kinshasa", zh: "金沙萨", tz: "Africa/Kinshasa" },
     { id: "luanda", en: "Luanda", zh: "罗安达", tz: "Africa/Luanda" }, { id: "harare", en: "Harare", zh: "哈拉雷", tz: "Africa/Harare" }
 ];
-function getCityById(id: string, customCities: CityDef[] = []): CityDef { const f = [...CITY_DB, ...customCities].find(c => c.id === id); return (f as CityDef) || CITY_DB[0]; }
+function getCityById(id: string, customCities: CityDef[] = []): CityDef { const f = [...CITY_DB, ...customCities].find(c => c.id === id); return f || CITY_DB[0]; }
 
 const TZ_ZH_MAP: Record<string, string> = { "Abidjan":"阿比让","Accra":"阿克拉","Algiers":"阿尔及尔","Bissau":"比绍","Cairo":"开罗","Casablanca":"卡萨布兰卡","Ceuta":"休达","El_Aaiun":"阿尤恩","Johannesburg":"约翰内斯堡","Juba":"朱巴","Khartoum":"喀土穆","Lagos":"拉各斯","Maputo":"马普托","Monrovia":"蒙罗维亚","Nairobi":"内罗毕","Ndjamena":"恩贾梅纳","Sao_Tome":"圣多美","Tripoli":"的黎波里","Tunis":"突尼斯","Windhoek":"温得和克","Adak":"埃达克","Anchorage":"安克雷奇","Anguilla":"安圭拉","Antigua":"安提瓜","Araguaina":"阿拉瓜伊纳","Argentina":"阿根廷","Buenos_Aires":"布宜诺斯艾利斯","Catamarca":"卡塔马卡","Cordoba":"科尔多瓦","Jujuy":"胡胡伊","La_Rioja":"拉里奥哈","Mendoza":"门多萨","Rio_Gallegos":"里奥加耶戈斯","Salta":"萨尔塔","San_Juan":"圣胡安","San_Luis":"圣路易斯","Tucuman":"图库曼","Ushuaia":"乌斯怀亚","Aruba":"阿鲁巴","Asuncion":"亚松森","Bahia":"巴伊亚","Bahia_Banderas":"巴伊亚班德拉斯","Barbados":"巴巴多斯","Belize":"伯利兹","Blanc-Sablon":"布朗萨布隆","Boa_Vista":"博阿维斯塔","Bogota":"波哥大","Boise":"博伊西","Cuiaba":"库亚巴","Curacao":"库拉索","Danmarkshavn":"丹麦港","Dawson":"道森","Dawson_Creek":"道森克里克","Denver":"丹佛","Detroit":"底特律","Dominica":"多米尼加","Edmonton":"埃德蒙顿","Eirunepe":"埃鲁内佩","El_Salvador":"萨尔瓦多","Fort_Nelson":"纳尔逊堡","Fortaleza":"福塔莱萨","Glace_Bay":"格莱斯湾","Godthab":"戈特霍布","Goose_Bay":"鹅湾","Grand_Turk":"大特克","Grenada":"格林纳达","Guadeloupe":"瓜德罗普","Guatemala":"危地马拉","Guayaquil":"瓜亚基尔","Guyana":"圭亚那","Halifax":"哈利法克斯","Havana":"哈瓦那","Hermosillo":"埃莫西约","Indiana":"印第安纳","Indianapolis":"印第安纳波利斯","Knox":"诺克斯","Marengo":"马伦戈","Petersburg":"彼得斯堡","Tell_City":"特尔城","Vevay":"韦韦","Vincennes":"万塞讷","Winamac":"温纳马克","Inuvik":"伊努维克","Iqaluit":"伊卡卢伊特","Jamaica":"牙买加","Juneau":"朱诺","Kentucky":"肯塔基","Louisville":"路易斯维尔","Monticello":"蒙蒂塞洛","Kralendijk":"克拉伦代克","La_Paz":"拉巴斯","Lima":"利马","Los_Angeles":"洛杉矶","Lower_Princes":"下王子区","Maceio":"马塞约","Managua":"马那瓜","Manaus":"马瑙斯","Marigot":"马里戈特","Martinique":"马提尼克","Matamoros":"马塔莫罗斯","Mazatlan":"马萨特兰","Menominee":"梅诺米尼","Merida":"梅里达","Metlakatla":"梅特拉卡特拉","Mexico_City":"墨西哥城","Miquelon":"密克隆","Moncton":"蒙克顿","Monterrey":"蒙特雷","Montevideo":"蒙得维的亚","Montserrat":"蒙特塞拉特","Nassau":"拿骚","New_York":"纽约","Nipigon":"尼皮贡","Nome":"诺姆","Noronha":"诺罗尼亚","North_Dakota":"北达科他","Beulah":"比尤拉","Center":"中心城","New_Salem":"新塞勒姆","Ojinaga":"奥希纳加","Panama":"巴拿马","Pangnirtung":"庞纳图","Paramaribo":"帕拉马里博","Phoenix":"凤凰城","Port-au-Prince":"太子港","Port_of_Spain":"西班牙港","Porto_Velho":"韦柳港","Puerto_Rico":"波多黎各","Punta_Arenas":"蓬塔阿雷纳斯","Rankin_Inlet":"兰金因莱特","Recife":"累西腓","Regina":"里贾纳","Resolute":"雷索卢特","Rio_Branco":"里约布兰科","Santarem":"圣塔伦","Santiago":"圣地亚哥","Santo_Domingo":"圣多明各","Sao_Paulo":"圣保罗","Scoresbysund":"斯科斯比松","Sitka":"锡特卡","St_Barthelemy":"圣巴泰勒米","St_Johns":"圣约翰","St_Kitts":"圣基茨","St_Lucia":"圣卢西亚","St_Thomas":"圣托马斯","St_Vincent":"圣文森特","Swift_Current":"斯威夫特卡伦特","Tegucigalpa":"特古西加尔巴","Thule":"图勒","Thunder_Bay":"桑德贝","Tijuana":"蒂华纳","Toronto":"多伦多","Tortola":"托尔托拉","Vancouver":"温哥华","Whitehorse":"怀特霍斯","Winnipeg":"温尼伯","Yakutat":"亚库塔特","Yellowknife":"黄刀","Crestone":"克雷斯通" };
 const TZ_PREFIX: Record<string, string> = { 'Asia': '亚洲', 'Europe': '欧洲', 'America': '美洲', 'Africa': '非洲', 'Australia': '澳洲', 'Pacific': '太平洋', 'Indian': '印度洋', 'Atlantic': '大西洋', 'Antarctica': '南极洲' };
@@ -127,11 +128,11 @@ const TZ_PREFIX: Record<string, string> = { 'Asia': '亚洲', 'Europe': '欧洲'
 function getTzDisplayName(tz: string, lang: 'en' | 'zh'): string {
     if (lang !== 'zh') return tz.replace(/_/g, ' ');
     const matched = CITY_DB.find(c => c.tz === tz);
-    if (matched && matched.zh) return `(${TZ_PREFIX[tz.split('/')[0] as string] || ''}) ${matched.zh}`;
+    if (matched && matched.zh) return `(${TZ_PREFIX[tz.split('/')[0]] || ''}) ${matched.zh}`;
     let parts = tz.split('/');
     if (parts.length === 1) return tz;
-    let prefix = TZ_PREFIX[parts[0] as string] || parts[0];
-    let suffix = parts[parts.length - 1] as string;
+    let prefix = TZ_PREFIX[parts[0]] || parts[0];
+    let suffix = parts[parts.length - 1];
     let translatedSuffix = TZ_ZH_MAP[suffix] || suffix.replace(/_/g, ' ');
     return `${prefix} / ${translatedSuffix}`;
 }
@@ -198,11 +199,11 @@ class TimeEngine {
         if (tz === 'Local') return { h: now.getHours(), m: now.getMinutes(), s: now.getSeconds(), ms, d: now.getDate() };
         try {
             const formatter = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour12: false, hour: 'numeric', minute: 'numeric', second: 'numeric', day: 'numeric' });
-            const parts = (formatter as any).formatToParts(now);
-            const getVal = (type: string) => parseInt(parts.find((p: any) => p.type === type)?.value || '0');
+            const parts = (formatter as unknown as { formatToParts(d: Date): Array<{type: string, value: string}> }).formatToParts(now);
+            const getVal = (t: string) => parseInt(parts.find((p) => p.type === t)?.value || '0');
             let h = getVal('hour'); if (h === 24) h = 0;
             return { h, m: getVal('minute'), s: getVal('second'), ms, d: getVal('day') };
-        } catch (e) { return { h: now.getHours(), m: now.getMinutes(), s: now.getSeconds(), ms, d: now.getDate() }; }
+        } catch { return { h: now.getHours(), m: now.getMinutes(), s: now.getSeconds(), ms, d: now.getDate() }; }
     }
 }
 
@@ -331,7 +332,7 @@ class ClockRenderer {
 
     static buildStaticMiniPreview(settings: Partial<MeridianSettings>): HTMLElement {
         const wrapper = activeDocument.createElement("div");
-        wrapper.setCssStyles({ width: "100%", height: "100%" });
+        wrapper.classList.add("meridian-preview-wrapper");
 
         if (settings.clockFace === 'digital') {
             const timeCol = this.getRealColor(settings, 'digiTime');
@@ -343,14 +344,19 @@ class ClockRenderer {
             const dt = face.createEl('div', { cls: 'meridian-digital-time' });
             dt.setCssStyles({ fontSize: settings.digitalSecSize === 'large' ? '18px' : '22px' }); 
             
-            const secStyle = settings.digitalSecSize === 'large' 
-                ? `font-size: 1em; margin-left: 2px; font-weight: inherit; color: ${secCol};`
-                : `font-size: 0.4em; margin-left: 2px; font-weight: 700; color: ${secCol}; opacity: 0.9;`;
-            
             dt.empty();
-            dt.createSpan({ text: "10:09", attr: { style: `color: ${timeCol}` } });
+            const s1 = dt.createSpan({ text: "10:09" });
+            s1.setCssStyles({ color: timeCol });
+            
             if (settings.digitalSecSize !== 'hidden') {
-                dt.createSpan({ text: "30", attr: { style: secStyle } });
+                const s2 = dt.createSpan({ text: "30" });
+                s2.setCssStyles({ 
+                    fontSize: settings.digitalSecSize === 'large' ? '1em' : '0.4em',
+                    marginLeft: '2px', 
+                    fontWeight: settings.digitalSecSize === 'large' ? 'inherit' : '700', 
+                    color: secCol, 
+                    opacity: settings.digitalSecSize === 'large' ? '1' : '0.9' 
+                });
             }
             
             return wrapper;
@@ -407,8 +413,8 @@ class MeridianView extends ItemView {
         
         const wrapper = container.createEl("div", { cls: "meridian-clock-wrapper" });
         const { isWorldClock, cityIds } = this.plugin.settings;
-        if (isWorldClock) { wrapper.classList.add("meridian-world-clock-grid"); for (let i = 0; i < 4; i++) this.buildSingleClock(wrapper, cityIds[i] as string, true); } 
-        else { this.buildSingleClock(wrapper, cityIds[0] as string, false); }
+        if (isWorldClock) { wrapper.classList.add("meridian-world-clock-grid"); for (let i = 0; i < 4; i++) this.buildSingleClock(wrapper, cityIds[i], true); } 
+        else { this.buildSingleClock(wrapper, cityIds[0], false); }
         this.startEngine();
     }
 
@@ -464,43 +470,45 @@ class MeridianView extends ItemView {
             
             const timeCol = ClockRenderer.getRealColor(this.plugin.settings, 'digiTime');
             const secCol = ClockRenderer.getRealColor(this.plugin.settings, 'digiSec');
-            const secStyle = this.plugin.settings.digitalSecSize === 'large' 
-                ? `font-size: 1em; margin-left: 6px; font-weight: inherit; color: ${secCol};`
-                : `font-size: 0.4em; margin-left: 6px; font-weight: 700; color: ${secCol}; opacity: 0.9;`;
 
             for (const item of this.activeDigital) {
                 const { h, m, s } = TimeEngine.getTimeParts(item.tz, now);
                 const hh = padZero(h); const mm = padZero(m); const ss = padZero(s);
                 
                 item.el.empty();
-                item.el.createSpan({ text: `${hh}:${mm}`, attr: { style: `color: ${timeCol}` } });
+                const s1 = item.el.createSpan({ text: `${hh}:${mm}` });
+                s1.setCssStyles({ color: timeCol });
+                
                 if (this.plugin.settings.digitalSecSize !== 'hidden') {
-                    item.el.createSpan({ text: ss, attr: { style: secStyle } });
+                    const s2 = item.el.createSpan({ text: ss });
+                    s2.setCssStyles({ 
+                        fontSize: this.plugin.settings.digitalSecSize === 'large' ? '1em' : '0.4em',
+                        marginLeft: '6px', 
+                        fontWeight: this.plugin.settings.digitalSecSize === 'large' ? 'inherit' : '700', 
+                        color: secCol, 
+                        opacity: this.plugin.settings.digitalSecSize === 'large' ? '1' : '0.9' 
+                    });
                 }
             }
             this.animationFrameId = window.requestAnimationFrame(tick);
         };
         tick();
     }
-    async onClose() { if (this.animationFrameId !== null) window.cancelAnimationFrame(this.animationFrameId); }
+    onClose() { if (this.animationFrameId !== null) window.cancelAnimationFrame(this.animationFrameId); return Promise.resolve(); }
 }
 
 // =================================================================
 // 6. 各类原生弹窗 
 // =================================================================
-
-// 【新增核心功能】独立的时区搜索器，突破 100 条限制！
 class TimezoneSuggestModal extends FuzzySuggestModal<string> {
     plugin: MeridianPlugin; onChoose: (tz: string) => void;
     constructor(app: App, plugin: MeridianPlugin, onChoose: (tz: string) => void) { 
         super(app); this.plugin = plugin; this.onChoose = onChoose; 
         this.setPlaceholder(TEXTS[plugin.settings.language].modalTzDesc); 
-        this.limit = 1000; // 突破 Obsidian 默认 100 条渲染限制，直接渲染全球时区！
+        this.limit = 1000; 
     }
-    getItems() { return (Intl as any).supportedValuesOf('timeZone'); } 
-    getItemText(tz: string) { 
-        return this.plugin.settings.language === 'zh' ? getTzDisplayName(tz, 'zh') : tz.replace(/_/g, ' '); 
-    }
+    getItems() { return (Intl as unknown as { supportedValuesOf(k: string): string[] }).supportedValuesOf('timeZone'); } 
+    getItemText(tz: string) { return this.plugin.settings.language === 'zh' ? getTzDisplayName(tz, 'zh') : tz.replace(/_/g, ' '); }
     onChooseItem(tz: string) { this.onChoose(tz); }
 }
 
@@ -509,7 +517,7 @@ class CitySuggestModal extends FuzzySuggestModal<CityDef> {
     constructor(app: App, plugin: MeridianPlugin, onChoose: (city: CityDef) => void) { 
         super(app); this.plugin = plugin; this.onChoose = onChoose; 
         this.setPlaceholder(TEXTS[plugin.settings.language].btnSearch); 
-        this.limit = 1000; // 同理，突破 100 条搜索限制
+        this.limit = 1000;
     }
     getItems() { return [...CITY_DB, ...this.plugin.settings.customCities]; }
     getItemText(city: CityDef) { 
@@ -525,9 +533,9 @@ class PresetNameModal extends Modal {
     onOpen() {
         const { contentEl } = this; 
         const t = TEXTS[this.plugin.settings.language];
-        new Setting(contentEl).setName(t.saveModalTitle as string).setHeading();
+        new Setting(contentEl).setName(t.saveModalTitle).setHeading();
         const input = contentEl.createEl('input', { type: 'text', placeholder: t.saveInput });
-        input.setCssStyles({ width: "100%", marginBottom: "10px" });
+        input.classList.add("meridian-modal-input");
         const btn = contentEl.createEl('button', { text: t.btnSave, cls: 'mod-cta' });
         btn.onclick = () => { this.onSubmit(input.value || 'My Preset'); this.close(); };
     }
@@ -540,18 +548,17 @@ class CustomCityModal extends Modal {
     onOpen() {
         const { contentEl } = this;
         const t = TEXTS[this.plugin.settings.language];
-        new Setting(contentEl).setName(t.addCityModalTitle as string).setHeading();
+        new Setting(contentEl).setName(t.addCityModalTitle).setHeading();
         
         let enName = '', zhName = '';
         new Setting(contentEl).setName(t.modalEnName).addText(text => text.setPlaceholder("e.g. My Hometown").onChange(v => enName = v));
         new Setting(contentEl).setName(t.modalZhName).addText(text => text.setPlaceholder(t.phZh).onChange(v => zhName = v));
         
-        const allZones = (Intl as any).supportedValuesOf('timeZone');
+        const allZones = (Intl as unknown as { supportedValuesOf(k: string): string[] }).supportedValuesOf('timeZone');
         let selectedTz = allZones.includes('Asia/Shanghai') ? 'Asia/Shanghai' : allZones[0];
         
         const tzSetting = new Setting(contentEl).setName(t.modalTz).setDesc(t.modalTzDesc);
-        // 使用独立的智能时区搜索器
-        const tzBtn = tzSetting.addButton(btn => btn.setButtonText(getTzDisplayName(selectedTz, this.plugin.settings.language)).onClick(() => {
+        tzSetting.addButton(btn => btn.setButtonText(getTzDisplayName(selectedTz, this.plugin.settings.language)).onClick(() => {
             new TimezoneSuggestModal(this.app, this.plugin, (tz) => {
                 selectedTz = tz;
                 btn.setButtonText(getTzDisplayName(tz, this.plugin.settings.language));
@@ -574,14 +581,22 @@ export default class MeridianPlugin extends Plugin {
         await this.loadSettings();
         this.registerView(VIEW_TYPE_MERIDIAN, (leaf) => new MeridianView(leaf, this));
         this.addSettingTab(new MeridianSettingTab(this.app, this));
-        this.addCommand({ id: 'open', name: 'Open clock', callback: () => this.activateView() });
-        this.app.workspace.onLayoutReady(() => { this.activateView(); });
+        this.addCommand({ id: 'open', name: 'Open clock', callback: () => { void this.activateView(); } });
+        this.app.workspace.onLayoutReady(() => { void this.activateView(); });
     }
-    async onunload() { }
+    onunload() { }
     async activateView() {
-        const { workspace } = this.app; let leaf = workspace.getLeavesOfType(VIEW_TYPE_MERIDIAN)[0];
-        if (!leaf) { leaf = workspace.getRightLeaf(false) as WorkspaceLeaf | undefined; if (leaf) await leaf.setViewState({ type: VIEW_TYPE_MERIDIAN, active: true }); }
-        if (leaf) workspace.revealLeaf(leaf);
+        const { workspace } = this.app; 
+        const leaves = workspace.getLeavesOfType(VIEW_TYPE_MERIDIAN);
+        if (leaves.length > 0) {
+            workspace.revealLeaf(leaves[0]);
+        } else {
+            const leaf = workspace.getLeaf(true);
+            if (leaf) {
+                await leaf.setViewState({ type: VIEW_TYPE_MERIDIAN, active: true });
+                workspace.revealLeaf(leaf);
+            }
+        }
     }
     async loadSettings() { this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData()); }
     async saveSettings() {
@@ -597,13 +612,15 @@ export default class MeridianPlugin extends Plugin {
 class MeridianSettingTab extends PluginSettingTab {
     plugin: MeridianPlugin; 
     private previewFrameId: number | null = null; 
-    private previewActiveHands: any = null; 
+    private previewActiveHands: { h: SVGElement, m: SVGElement, s?: SVGElement, dateEl?: SVGTextElement | null } | null = null; 
     private previewDigitalEl: HTMLElement | null = null;
-    
     private tabStates: Record<string, boolean> = { official: false, collection: false, lang: false, color: false, geo: false, hands: false, tz: false, digiColor: false, digiFont: false, customCities: false };
 
     constructor(app: App, plugin: MeridianPlugin) { super(app, plugin); this.plugin = plugin; }
     hide() { if (this.previewFrameId !== null) window.cancelAnimationFrame(this.previewFrameId); }
+
+    private saveAndRefresh() { void this.plugin.saveSettings().then(() => this.display()); }
+    private saveAndRefreshPreview(previewBox: HTMLElement) { void this.plugin.saveSettings().then(() => this.buildPreview(previewBox)); }
 
     createDetails(container: HTMLElement, title: string, id: string): HTMLElement {
         const d = container.createEl('details', { cls: 'meridian-details' });
@@ -618,31 +635,31 @@ class MeridianSettingTab extends PluginSettingTab {
         const t = TEXTS[this.plugin.settings.language]; 
         const isAnalog = this.plugin.settings.clockFace === 'analog';
 
-        new Setting(containerEl).setName(t.settingsTitle as string).setHeading();
+        new Setting(containerEl).setName(t.settingsTitle).setHeading();
         
         const tabsContainer = containerEl.createEl('div', { cls: 'meridian-face-tabs' });
-        const tabAnalog = tabsContainer.createEl('div', { cls: `meridian-face-tab ${isAnalog ? 'is-active' : ''}`, text: t.tabAnalog as string });
-        const tabDigital = tabsContainer.createEl('div', { cls: `meridian-face-tab ${!isAnalog ? 'is-active' : ''}`, text: t.tabDigital as string });
+        const tabAnalog = tabsContainer.createEl('div', { cls: `meridian-face-tab ${isAnalog ? 'is-active' : ''}`, text: t.tabAnalog });
+        const tabDigital = tabsContainer.createEl('div', { cls: `meridian-face-tab ${!isAnalog ? 'is-active' : ''}`, text: t.tabDigital });
         
-        tabAnalog.onclick = async () => { this.plugin.settings.clockFace = 'analog'; await this.plugin.saveSettings(); this.display(); };
-        tabDigital.onclick = async () => { this.plugin.settings.clockFace = 'digital'; await this.plugin.saveSettings(); this.display(); };
+        tabAnalog.onclick = () => { this.plugin.settings.clockFace = 'analog'; this.saveAndRefresh(); };
+        tabDigital.onclick = () => { this.plugin.settings.clockFace = 'digital'; this.saveAndRefresh(); };
 
         const previewBox = containerEl.createEl('div', { cls: 'meridian-settings-preview-container' });
         this.buildPreview(previewBox);
 
-        const secGallery = this.createDetails(containerEl, t.secOfficial as string, 'official'); 
+        const secGallery = this.createDetails(containerEl, t.secOfficial, 'official'); 
         const galleryGrid = secGallery.createEl('div', { cls: 'meridian-gallery' });
         const activePresets = isAnalog ? ANALOG_PRESETS : DIGITAL_PRESETS;
         activePresets.forEach(preset => this.renderPresetCard(galleryGrid, preset));
         
-        const secCollection = this.createDetails(containerEl, t.secCollection as string, 'collection'); 
+        const secCollection = this.createDetails(containerEl, t.secCollection, 'collection'); 
         const collectionGrid = secCollection.createEl('div', { cls: 'meridian-gallery' });
         const myPresets = this.plugin.settings.userPresets.filter(p => p.visuals.clockFace === this.plugin.settings.clockFace);
-        if (myPresets.length === 0) collectionGrid.createEl('div', { text: t.emptyCollection as string, attr: { style: 'color: var(--text-muted); font-size: 0.85em;' } });
+        if (myPresets.length === 0) collectionGrid.createEl('div', { text: t.emptyCollection, cls: "meridian-empty-collection-text" });
         else myPresets.forEach(preset => this.renderPresetCard(collectionGrid, preset));
         
-        new Setting(secCollection).addButton(btn => btn.setButtonText(t.btnSavePreset as string).setCta().onClick(() => {
-            new PresetNameModal(this.app, this.plugin, async (name) => {
+        new Setting(secCollection).addButton(btn => btn.setButtonText(t.btnSavePreset).setCta().onClick(() => {
+            new PresetNameModal(this.app, this.plugin, (name) => {
                 const newPreset: SavedPreset = {
                     id: 'usr_' + Date.now(), name: name, isCustom: true,
                     visuals: {
@@ -655,101 +672,121 @@ class MeridianSettingTab extends PluginSettingTab {
                 };
                 if (!this.plugin.settings.userPresets) this.plugin.settings.userPresets = [];
                 this.plugin.settings.userPresets.push(newPreset);
-                await this.plugin.saveSettings(); this.display();
+                this.saveAndRefresh();
             }).open();
         }));
 
-        const secLang = this.createDetails(containerEl, t.secLang as string, 'lang');
-        new Setting(secLang).setName(t.langName as string).addDropdown(drop => drop.addOption('zh', '简体中文').addOption('en', 'English').setValue(this.plugin.settings.language).onChange(async (v: 'zh'|'en') => { this.plugin.settings.language = v; await this.plugin.saveSettings(); this.display(); }));
+        const secLang = this.createDetails(containerEl, t.secLang, 'lang');
+        new Setting(secLang).setName(t.langName).addDropdown(drop => drop.addOption('zh', '简体中文').addOption('en', 'English').setValue(this.plugin.settings.language).onChange((v: string) => { this.plugin.settings.language = v as 'zh'|'en'; this.saveAndRefresh(); }));
 
         if (isAnalog) {
-            const secColor = this.createDetails(containerEl, t.secColor as string, 'color');
-            const addColorSetting = (container: HTMLElement, name: string, dictKey: 'bg'|'accent'|'generic', valKey: string, customKey: string) => {
-                const dict = COLOR_OPTIONS[dictKey][this.plugin.settings.language] as Record<string, string>;
+            const secColor = this.createDetails(containerEl, t.secColor, 'color');
+            const addColorSetting = (container: HTMLElement, name: string, dictKey: string, valKey: keyof MeridianSettings, customKey: keyof MeridianSettings) => {
+                const dict = COLOR_OPTIONS[dictKey][this.plugin.settings.language];
                 new Setting(container).setName(name).addDropdown(drop => {
                     for (const [hex, label] of Object.entries(dict)) drop.addOption(hex, label);
-                    drop.setValue((this.plugin.settings as any)[valKey]).onChange(async (v) => { (this.plugin.settings as any)[valKey] = v; await this.plugin.saveSettings(); this.display(); });
+                    drop.setValue(this.plugin.settings[valKey] as string).onChange((v: string) => { 
+                        (this.plugin.settings as Record<string, string>)[valKey] = v; 
+                        this.saveAndRefresh(); 
+                    });
                 });
-                if ((this.plugin.settings as any)[valKey] === 'custom') new Setting(container).setName(t.colorCustom as string).addColorPicker(color => color.setValue((this.plugin.settings as any)[customKey]).onChange(async (v) => { (this.plugin.settings as any)[customKey] = v; await this.plugin.saveSettings(); this.buildPreview(previewBox); }));
+                if (this.plugin.settings[valKey] === 'custom') {
+                    new Setting(container).setName(t.colorCustom).addColorPicker(color => {
+                        color.setValue(this.plugin.settings[customKey] as string).onChange((v: string) => {
+                            (this.plugin.settings as Record<string, string>)[customKey] = v;
+                            this.saveAndRefreshPreview(previewBox);
+                        });
+                    });
+                }
             };
-            addColorSetting(secColor, t.bgName as string, 'bg', 'dialBgColor', 'customDialBgColor');
-            addColorSetting(secColor, t.colorName as string, 'accent', 'presetColor', 'customColor');
-            addColorSetting(secColor, t.numColorName as string, 'generic', 'numberColor', 'customNumberColor');
-            addColorSetting(secColor, t.tickColorName as string, 'generic', 'tickColor', 'customTickColor');
-            addColorSetting(secColor, t.hHandColorName as string, 'generic', 'hHandColor', 'customHHandColor');
-            addColorSetting(secColor, t.mHandColorName as string, 'generic', 'mHandColor', 'customMHandColor');
+            addColorSetting(secColor, t.bgName, 'bg', 'dialBgColor', 'customDialBgColor');
+            addColorSetting(secColor, t.colorName, 'accent', 'presetColor', 'customColor');
+            addColorSetting(secColor, t.numColorName, 'generic', 'numberColor', 'customNumberColor');
+            addColorSetting(secColor, t.tickColorName, 'generic', 'tickColor', 'customTickColor');
+            addColorSetting(secColor, t.hHandColorName, 'generic', 'hHandColor', 'customHHandColor');
+            addColorSetting(secColor, t.mHandColorName, 'generic', 'mHandColor', 'customMHandColor');
 
-            const secGeo = this.createDetails(containerEl, t.secGeo as string, 'geo');
-            new Setting(secGeo).setName(t.outerRing as string).addDropdown(drop => drop.addOption('ticks', t.optTicks as string).addOption('ticks-dense', t.optDense as string).addOption('ticks-uniform', t.optUniform as string).addOption('dots-lines', t.optDotsLines as string).addOption('numbers', t.optNumbers as string).addOption('hidden', t.optHidden as string).setValue(this.plugin.settings.outerRing).onChange(async (v: any) => { 
-                this.plugin.settings.outerRing = v; 
+            const secGeo = this.createDetails(containerEl, t.secGeo, 'geo');
+            new Setting(secGeo).setName(t.outerRing).addDropdown(drop => drop.addOption('ticks', t.optTicks).addOption('ticks-dense', t.optDense).addOption('ticks-uniform', t.optUniform).addOption('dots-lines', t.optDotsLines).addOption('numbers', t.optNumbers).addOption('hidden', t.optHidden).setValue(this.plugin.settings.outerRing).onChange((v: string) => { 
+                this.plugin.settings.outerRing = v as MeridianSettings['outerRing']; 
                 if (v === 'dots-lines') this.plugin.settings.innerRing = 'hidden';
-                await this.plugin.saveSettings(); this.display(); 
+                this.saveAndRefresh(); 
             }));
-            const innerSet = new Setting(secGeo).setName(t.innerRing as string).addDropdown(drop => drop.addOption('ticks', t.optTicks as string).addOption('numbers', t.optNumbers as string).addOption('hidden', t.optHidden as string).setValue(this.plugin.settings.innerRing).onChange(async (v: any) => { this.plugin.settings.innerRing = v; await this.plugin.saveSettings(); this.buildPreview(previewBox); }));
+            const innerSet = new Setting(secGeo).setName(t.innerRing).addDropdown(drop => drop.addOption('ticks', t.optTicks).addOption('numbers', t.optNumbers).addOption('hidden', t.optHidden).setValue(this.plugin.settings.innerRing).onChange((v: string) => { this.plugin.settings.innerRing = v as MeridianSettings['innerRing']; this.saveAndRefreshPreview(previewBox); }));
             if (this.plugin.settings.outerRing === 'dots-lines') innerSet.setDisabled(true);
 
-            const secHands = this.createDetails(containerEl, t.secHands as string, 'hands');
-            new Setting(secHands).setName(t.secMode as string).addDropdown(drop => drop.addOption('sweep', t.optSweep as string).addOption('tick', t.optTick as string).addOption('hidden', t.optHidden as string).setValue(this.plugin.settings.secondHandMode).onChange(async (v: any) => { this.plugin.settings.secondHandMode = v; await this.plugin.saveSettings(); this.buildPreview(previewBox); }));
-            new Setting(secHands).setName(t.showDate as string).addToggle(toggle => toggle.setValue(this.plugin.settings.showDate).onChange(async (v) => { this.plugin.settings.showDate = v; await this.plugin.saveSettings(); this.buildPreview(previewBox); }));
+            const secHands = this.createDetails(containerEl, t.secHands, 'hands');
+            new Setting(secHands).setName(t.secMode).addDropdown(drop => drop.addOption('sweep', t.optSweep).addOption('tick', t.optTick).addOption('hidden', t.optHidden).setValue(this.plugin.settings.secondHandMode).onChange((v: string) => { this.plugin.settings.secondHandMode = v as MeridianSettings['secondHandMode']; this.saveAndRefreshPreview(previewBox); }));
+            new Setting(secHands).setName(t.showDate).addToggle(toggle => toggle.setValue(this.plugin.settings.showDate).onChange((v) => { this.plugin.settings.showDate = v; this.saveAndRefreshPreview(previewBox); }));
         
         } else {
-            const secColor = this.createDetails(containerEl, t.secColor as string, 'digiColor');
-            const addDigiColor = (container: HTMLElement, name: string, dictKey: 'generic', valKey: string, customKey: string) => {
-                const dict = COLOR_OPTIONS[dictKey][this.plugin.settings.language] as Record<string, string>;
+            const secColor = this.createDetails(containerEl, t.secColor, 'digiColor');
+            const addDigiColor = (container: HTMLElement, name: string, dictKey: string, valKey: keyof MeridianSettings, customKey: keyof MeridianSettings) => {
+                const dict = COLOR_OPTIONS[dictKey][this.plugin.settings.language];
                 new Setting(container).setName(name).addDropdown(drop => {
                     for (const [hex, label] of Object.entries(dict)) drop.addOption(hex, label);
-                    drop.setValue((this.plugin.settings as any)[valKey]).onChange(async (v) => { (this.plugin.settings as any)[valKey] = v; await this.plugin.saveSettings(); this.display(); });
+                    drop.setValue(this.plugin.settings[valKey] as string).onChange((v: string) => { 
+                        (this.plugin.settings as Record<string, string>)[valKey] = v; 
+                        this.saveAndRefresh(); 
+                    });
                 });
-                if ((this.plugin.settings as any)[valKey] === 'custom') new Setting(container).setName(t.colorCustom as string).addColorPicker(color => color.setValue((this.plugin.settings as any)[customKey]).onChange(async (v) => { (this.plugin.settings as any)[customKey] = v; await this.plugin.saveSettings(); this.buildPreview(previewBox); }));
+                if (this.plugin.settings[valKey] === 'custom') {
+                    new Setting(container).setName(t.colorCustom).addColorPicker(color => {
+                        color.setValue(this.plugin.settings[customKey] as string).onChange((v: string) => {
+                            (this.plugin.settings as Record<string, string>)[customKey] = v;
+                            this.saveAndRefreshPreview(previewBox);
+                        });
+                    });
+                }
             };
-            addDigiColor(secColor, t.digiTimeColor as string, 'generic', 'digitalTimeColor', 'customDigitalTimeColor');
-            addDigiColor(secColor, t.digiSecColor as string, 'generic', 'digitalSecColor', 'customDigitalSecColor');
+            addDigiColor(secColor, t.digiTimeColor, 'generic', 'digitalTimeColor', 'customDigitalTimeColor');
+            addDigiColor(secColor, t.digiSecColor, 'generic', 'digitalSecColor', 'customDigitalSecColor');
 
-            const secFont = this.createDetails(containerEl, t.fontTitle as string, 'digiFont');
-            new Setting(secFont).setName(t.digiSecSize as string).addDropdown(drop => drop.addOption('small', t.optSmall as string).addOption('large', t.optLarge as string).addOption('hidden', t.optHidden as string).setValue(this.plugin.settings.digitalSecSize).onChange(async (v: any) => { this.plugin.settings.digitalSecSize = v; await this.plugin.saveSettings(); this.buildPreview(previewBox); }));
+            const secFont = this.createDetails(containerEl, t.fontTitle, 'digiFont');
+            new Setting(secFont).setName(t.digiSecSize).addDropdown(drop => drop.addOption('small', t.optSmall).addOption('large', t.optLarge).addOption('hidden', t.optHidden).setValue(this.plugin.settings.digitalSecSize).onChange((v: string) => { this.plugin.settings.digitalSecSize = v as MeridianSettings['digitalSecSize']; this.saveAndRefreshPreview(previewBox); }));
             
             const fontGrid = secFont.createEl('div', { cls: 'meridian-font-picker' });
-            const fontList = FONTS[this.plugin.settings.language] as Array<any>;
+            const fontList = FONTS[this.plugin.settings.language];
             fontList.forEach(font => {
                 const card = fontGrid.createEl('div', { cls: `meridian-font-card ${this.plugin.settings.digitalFont === font.id ? 'is-active' : ''}` });
                 card.setCssStyles({ fontFamily: font.id });
                 card.createEl('div', { text: '10:09' });
                 card.createEl('div', { cls: 'meridian-font-label', text: font.name });
-                card.onclick = async () => { this.plugin.settings.digitalFont = font.id; await this.plugin.saveSettings(); this.display(); };
+                card.onclick = () => { this.plugin.settings.digitalFont = font.id; this.saveAndRefresh(); };
             });
         }
 
-        const secTz = this.createDetails(containerEl, t.secTz as string, 'tz');
-        new Setting(secTz).setName(t.worldClock as string).addToggle(toggle => toggle.setValue(this.plugin.settings.isWorldClock).onChange(async (v) => { this.plugin.settings.isWorldClock = v; await this.plugin.saveSettings(); this.display(); }));
+        const secTz = this.createDetails(containerEl, t.secTz, 'tz');
+        new Setting(secTz).setName(t.worldClock).addToggle(toggle => toggle.setValue(this.plugin.settings.isWorldClock).onChange((v) => { this.plugin.settings.isWorldClock = v; this.saveAndRefresh(); }));
         const tzCount = this.plugin.settings.isWorldClock ? 4 : 1;
         for (let i = 0; i < tzCount; i++) {
-            const cityInfo = getCityById(this.plugin.settings.cityIds[i] as string, this.plugin.settings.customCities);
+            const cityInfo = getCityById(this.plugin.settings.cityIds[i], this.plugin.settings.customCities);
             const displayName = this.plugin.settings.language === 'zh' ? cityInfo.zh : cityInfo.en;
-            new Setting(secTz).setName(this.plugin.settings.isWorldClock ? `${t.tzWorld} ${i + 1}` : (t.tzMain as string)).addButton(btn => btn.setButtonText(t.btnSearch as string).setCta().onClick(() => { new CitySuggestModal(this.app, this.plugin, async (selectedCity) => { this.plugin.settings.cityIds[i] = selectedCity.id; await this.plugin.saveSettings(); this.display(); }).open(); })).addText(text => text.setValue(displayName).setDisabled(true));
+            new Setting(secTz).setName(this.plugin.settings.isWorldClock ? `${t.tzWorld} ${i + 1}` : t.tzMain).addButton(btn => btn.setButtonText(t.btnSearch).setCta().onClick(() => { new CitySuggestModal(this.app, this.plugin, (selectedCity) => { this.plugin.settings.cityIds[i] = selectedCity.id; this.saveAndRefresh(); }).open(); })).addText(text => text.setValue(displayName).setDisabled(true));
         }
 
-        const secCustomCity = this.createDetails(containerEl, t.customCitiesTitle as string, 'customCities');
-        new Setting(secCustomCity).addButton(btn => btn.setButtonText(t.btnAddCity as string).setCta().onClick(() => {
-            new CustomCityModal(this.app, this.plugin, async (city) => {
+        const secCustomCity = this.createDetails(containerEl, t.customCitiesTitle, 'customCities');
+        new Setting(secCustomCity).addButton(btn => btn.setButtonText(t.btnAddCity).setCta().onClick(() => {
+            new CustomCityModal(this.app, this.plugin, (city) => {
                 if (!this.plugin.settings.customCities) this.plugin.settings.customCities = [];
                 this.plugin.settings.customCities.push(city);
-                await this.plugin.saveSettings(); this.display();
+                this.saveAndRefresh();
             }).open();
         }));
 
         const cList = secCustomCity.createEl('div', { cls: 'meridian-city-list' });
         if (!this.plugin.settings.customCities || this.plugin.settings.customCities.length === 0) {
-            cList.createEl('div', { text: t.customCityEmpty as string, attr: { style: 'color: var(--text-muted); font-size: 0.85em; text-align: center; padding: 10px;' } });
+            cList.createEl('div', { text: t.customCityEmpty, cls: "meridian-empty-collection-text" });
         } else {
             this.plugin.settings.customCities.forEach(city => {
                 const row = cList.createEl('div', { cls: 'meridian-city-row' });
                 const info = row.createEl('div', { cls: 'meridian-city-info' });
                 info.createEl('div', { cls: 'meridian-city-name', text: this.plugin.settings.language === 'zh' ? city.zh : city.en });
                 info.createEl('div', { cls: 'meridian-city-tz', text: city.tz });
-                const delBtn = row.createEl('button', { cls: 'meridian-delete-btn', text: t.btnDelete as string });
-                delBtn.onclick = async () => {
+                const delBtn = row.createEl('button', { cls: 'meridian-delete-btn', text: t.btnDelete });
+                delBtn.onclick = () => {
                     this.plugin.settings.customCities = this.plugin.settings.customCities.filter(c => c.id !== city.id);
-                    await this.plugin.saveSettings(); this.display();
+                    this.saveAndRefresh();
                 };
             });
         }
@@ -761,17 +798,17 @@ class MeridianSettingTab extends PluginSettingTab {
         const wrapper = ClockRenderer.buildStaticMiniPreview(preset.visuals);
         svgWrapper.appendChild(wrapper);
         card.createEl('div', { cls: 'meridian-preset-name', text: preset.name });
-        card.onClickEvent(async (e) => {
+        card.onClickEvent((e) => {
             if ((e.target as HTMLElement).tagName === 'BUTTON') return;
             Object.assign(this.plugin.settings, preset.visuals);
-            await this.plugin.saveSettings(); this.display(); 
+            this.saveAndRefresh(); 
         });
 
         if (preset.isCustom) {
             const delBtn = card.createEl('button', { cls: 'meridian-delete-btn', text: TEXTS[this.plugin.settings.language].btnDelete });
-            delBtn.onclick = async () => {
+            delBtn.onclick = () => {
                 this.plugin.settings.userPresets = this.plugin.settings.userPresets.filter(p => p.id !== preset.id);
-                await this.plugin.saveSettings(); this.display();
+                this.saveAndRefresh();
             };
         }
     }
@@ -821,16 +858,22 @@ class MeridianSettingTab extends PluginSettingTab {
             } else if (this.previewDigitalEl) {
                 const timeCol = ClockRenderer.getRealColor(this.plugin.settings, 'digiTime');
                 const secCol = ClockRenderer.getRealColor(this.plugin.settings, 'digiSec');
-                const secStyle = this.plugin.settings.digitalSecSize === 'large' 
-                    ? `font-size: 1em; margin-left: 6px; font-weight: inherit; color: ${secCol};`
-                    : `font-size: 0.4em; margin-left: 6px; font-weight: 700; color: ${secCol}; opacity: 0.9;`;
                 
                 const hh = padZero(now.getHours()); const mm = padZero(now.getMinutes()); const ss = padZero(now.getSeconds());
                 
                 this.previewDigitalEl.empty();
-                this.previewDigitalEl.createSpan({ text: `${hh}:${mm}`, attr: { style: `color: ${timeCol}` } });
+                const s1 = this.previewDigitalEl.createSpan({ text: `${hh}:${mm}` });
+                s1.setCssStyles({ color: timeCol });
+
                 if (this.plugin.settings.digitalSecSize !== 'hidden') {
-                    this.previewDigitalEl.createSpan({ text: ss, attr: { style: secStyle } });
+                    const s2 = this.previewDigitalEl.createSpan({ text: ss });
+                    s2.setCssStyles({ 
+                        fontSize: this.plugin.settings.digitalSecSize === 'large' ? '1em' : '0.4em',
+                        marginLeft: '6px', 
+                        fontWeight: this.plugin.settings.digitalSecSize === 'large' ? 'inherit' : '700', 
+                        color: secCol, 
+                        opacity: this.plugin.settings.digitalSecSize === 'large' ? '1' : '0.9' 
+                    });
                 }
             }
             this.previewFrameId = window.requestAnimationFrame(tick);
