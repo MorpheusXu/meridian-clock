@@ -53,14 +53,12 @@ const FONTS: Record<string, any> = {
 };
 
 // =================================================================
-// 2. 强悍的全球地毯式城市库 (300个手敲核心城市) & 智能时区翻译引擎
+// 2. 强悍的全球地毯式城市库
 // =================================================================
 export interface CityDef { id: string; en: string; zh: string; tz: string; isCustom?: boolean; }
 
-// 纯手工录入的全球 300 个核心城市数据库
 const CITY_DB: CityDef[] = [
     { id: "local", en: "Local Time", zh: "本地时间", tz: "Local" },
-    // 中国与东亚 (China & East Asia)
     { id: "beijing", en: "Beijing", zh: "北京", tz: "Asia/Shanghai" }, { id: "shanghai", en: "Shanghai", zh: "上海", tz: "Asia/Shanghai" }, { id: "guangzhou", en: "Guangzhou", zh: "广州", tz: "Asia/Shanghai" }, { id: "shenzhen", en: "Shenzhen", zh: "深圳", tz: "Asia/Shanghai" },
     { id: "chengdu", en: "Chengdu", zh: "成都", tz: "Asia/Shanghai" }, { id: "chongqing", en: "Chongqing", zh: "重庆", tz: "Asia/Shanghai" }, { id: "hangzhou", en: "Hangzhou", zh: "杭州", tz: "Asia/Shanghai" }, { id: "wuhan", en: "Wuhan", zh: "武汉", tz: "Asia/Shanghai" },
     { id: "xian", en: "Xi'an", zh: "西安", tz: "Asia/Shanghai" }, { id: "nanjing", en: "Nanjing", zh: "南京", tz: "Asia/Shanghai" }, { id: "tianjin", en: "Tianjin", zh: "天津", tz: "Asia/Shanghai" }, { id: "suzhou", en: "Suzhou", zh: "苏州", tz: "Asia/Shanghai" },
@@ -73,7 +71,6 @@ const CITY_DB: CityDef[] = [
     { id: "tokyo", en: "Tokyo", zh: "东京", tz: "Asia/Tokyo" }, { id: "osaka", en: "Osaka", zh: "大阪", tz: "Asia/Tokyo" }, { id: "kyoto", en: "Kyoto", zh: "京都", tz: "Asia/Tokyo" }, { id: "nagoya", en: "Nagoya", zh: "名古屋", tz: "Asia/Tokyo" },
     { id: "fukuoka", en: "Fukuoka", zh: "福冈", tz: "Asia/Tokyo" }, { id: "sapporo", en: "Sapporo", zh: "札幌", tz: "Asia/Tokyo" }, { id: "yokohama", en: "Yokohama", zh: "横滨", tz: "Asia/Tokyo" }, { id: "seoul", en: "Seoul", zh: "首尔", tz: "Asia/Seoul" },
     { id: "busan", en: "Busan", zh: "釜山", tz: "Asia/Seoul" }, { id: "incheon", en: "Incheon", zh: "仁川", tz: "Asia/Seoul" }, { id: "pyongyang", en: "Pyongyang", zh: "平壤", tz: "Asia/Pyongyang" }, { id: "ulaanbaatar", en: "Ulaanbaatar", zh: "乌兰巴托", tz: "Asia/Ulaanbaatar" },
-    // 东南亚与南亚 (Southeast & South Asia)
     { id: "singapore", en: "Singapore", zh: "新加坡", tz: "Asia/Singapore" }, { id: "kualalumpur", en: "Kuala Lumpur", zh: "吉隆坡", tz: "Asia/Kuala_Lumpur" }, { id: "penang", en: "Penang", zh: "槟城", tz: "Asia/Kuala_Lumpur" }, { id: "bangkok", en: "Bangkok", zh: "曼谷", tz: "Asia/Bangkok" },
     { id: "phuket", en: "Phuket", zh: "普吉岛", tz: "Asia/Bangkok" }, { id: "chiangmai", en: "Chiang Mai", zh: "清迈", tz: "Asia/Bangkok" }, { id: "jakarta", en: "Jakarta", zh: "雅加达", tz: "Asia/Jakarta" }, { id: "surabaya", en: "Surabaya", zh: "泗水", tz: "Asia/Jakarta" },
     { id: "bali", en: "Bali", zh: "巴厘岛", tz: "Asia/Makassar" }, { id: "manila", en: "Manila", zh: "马尼拉", tz: "Asia/Manila" }, { id: "cebu", en: "Cebu", zh: "宿务", tz: "Asia/Manila" }, { id: "hochiminh", en: "Ho Chi Minh", zh: "胡志明市", tz: "Asia/Ho_Chi_Minh" },
@@ -82,14 +79,12 @@ const CITY_DB: CityDef[] = [
     { id: "bangalore", en: "Bangalore", zh: "班加罗尔", tz: "Asia/Kolkata" }, { id: "chennai", en: "Chennai", zh: "金奈", tz: "Asia/Kolkata" }, { id: "kolkata", en: "Kolkata", zh: "加尔各答", tz: "Asia/Kolkata" }, { id: "hyderabad", en: "Hyderabad", zh: "海得拉巴", tz: "Asia/Kolkata" },
     { id: "karachi", en: "Karachi", zh: "卡拉奇", tz: "Asia/Karachi" }, { id: "lahore", en: "Lahore", zh: "拉合尔", tz: "Asia/Karachi" }, { id: "islamabad", en: "Islamabad", zh: "伊斯兰堡", tz: "Asia/Karachi" }, { id: "colombo", en: "Colombo", zh: "科伦坡", tz: "Asia/Colombo" },
     { id: "kathmandu", en: "Kathmandu", zh: "加德满都", tz: "Asia/Kathmandu" }, { id: "male", en: "Male", zh: "马累", tz: "Indian/Maldives" },
-    // 中东与中亚 (Middle East & Central Asia)
     { id: "dubai", en: "Dubai", zh: "迪拜", tz: "Asia/Dubai" }, { id: "abudhabi", en: "Abu Dhabi", zh: "阿布扎比", tz: "Asia/Dubai" }, { id: "riyadh", en: "Riyadh", zh: "利雅得", tz: "Asia/Riyadh" }, { id: "jeddah", en: "Jeddah", zh: "吉达", tz: "Asia/Riyadh" },
     { id: "mecca", en: "Mecca", zh: "麦加", tz: "Asia/Riyadh" }, { id: "doha", en: "Doha", zh: "多哈", tz: "Asia/Qatar" }, { id: "kuwait", en: "Kuwait City", zh: "科威特城", tz: "Asia/Kuwait" }, { id: "manama", en: "Manama", zh: "麦纳麦", tz: "Asia/Bahrain" },
     { id: "muscat", en: "Muscat", zh: "马斯喀特", tz: "Asia/Muscat" }, { id: "tehran", en: "Tehran", zh: "德黑兰", tz: "Asia/Tehran" }, { id: "baghdad", en: "Baghdad", zh: "巴格达", tz: "Asia/Baghdad" }, { id: "damascus", en: "Damascus", zh: "大马士革", tz: "Asia/Damascus" },
     { id: "amman", en: "Amman", zh: "安曼", tz: "Asia/Damascus" }, { id: "beirut", en: "Beirut", zh: "贝鲁特", tz: "Asia/Beirut" }, { id: "telaviv", en: "Tel Aviv", zh: "特拉维夫", tz: "Asia/Jerusalem" }, { id: "jerusalem", en: "Jerusalem", zh: "耶路撒冷", tz: "Asia/Jerusalem" },
     { id: "tashkent", en: "Tashkent", zh: "塔什干", tz: "Asia/Tashkent" }, { id: "almaty", en: "Almaty", zh: "阿拉木图", tz: "Asia/Almaty" }, { id: "astana", en: "Astana", zh: "阿斯塔纳", tz: "Asia/Almaty" }, { id: "bishkek", en: "Bishkek", zh: "比什凯克", tz: "Asia/Bishkek" },
     { id: "dushanbe", en: "Dushanbe", zh: "杜尚别", tz: "Asia/Dushanbe" }, { id: "ashgabat", en: "Ashgabat", zh: "阿什哈巴德", tz: "Asia/Ashgabat" }, { id: "kabul", en: "Kabul", zh: "喀布尔", tz: "Asia/Kabul" },
-    // 欧洲 (Europe)
     { id: "london", en: "London", zh: "伦敦", tz: "Europe/London" }, { id: "manchester", en: "Manchester", zh: "曼彻斯特", tz: "Europe/London" }, { id: "birmingham", en: "Birmingham", zh: "伯明翰", tz: "Europe/London" }, { id: "edinburgh", en: "Edinburgh", zh: "爱丁堡", tz: "Europe/London" },
     { id: "glasgow", en: "Glasgow", zh: "格拉斯哥", tz: "Europe/London" }, { id: "dublin", en: "Dublin", zh: "都柏林", tz: "Europe/Dublin" }, { id: "paris", en: "Paris", zh: "巴黎", tz: "Europe/Paris" }, { id: "marseille", en: "Marseille", zh: "马赛", tz: "Europe/Paris" },
     { id: "lyon", en: "Lyon", zh: "里昂", tz: "Europe/Paris" }, { id: "berlin", en: "Berlin", zh: "柏林", tz: "Europe/Berlin" }, { id: "munich", en: "Munich", zh: "慕尼黑", tz: "Europe/Berlin" }, { id: "frankfurt", en: "Frankfurt", zh: "法兰克福", tz: "Europe/Berlin" },
@@ -103,7 +98,6 @@ const CITY_DB: CityDef[] = [
     { id: "kiev", en: "Kyiv", zh: "基辅", tz: "Europe/Kyiv" }, { id: "minsk", en: "Minsk", zh: "明斯克", tz: "Europe/Minsk" }, { id: "warsaw", en: "Warsaw", zh: "华沙", tz: "Europe/Warsaw" }, { id: "krakow", en: "Krakow", zh: "克拉科夫", tz: "Europe/Warsaw" },
     { id: "prague", en: "Prague", zh: "布拉格", tz: "Europe/Prague" }, { id: "budapest", en: "Budapest", zh: "布达佩斯", tz: "Europe/Budapest" }, { id: "bucharest", en: "Bucharest", zh: "布加勒斯特", tz: "Europe/Bucharest" }, { id: "sofia", en: "Sofia", zh: "索非亚", tz: "Europe/Sofia" },
     { id: "athens", en: "Athens", zh: "雅典", tz: "Europe/Athens" }, { id: "istanbul", en: "Istanbul", zh: "伊斯坦布尔", tz: "Europe/Istanbul" }, { id: "ankara", en: "Ankara", zh: "安卡拉", tz: "Europe/Istanbul" },
-    // 北美洲 (North America)
     { id: "newyork", en: "New York", zh: "纽约", tz: "America/New_York" }, { id: "washingtondc", en: "Washington D.C.", zh: "华盛顿", tz: "America/New_York" }, { id: "boston", en: "Boston", zh: "波士顿", tz: "America/New_York" }, { id: "philadelphia", en: "Philadelphia", zh: "费城", tz: "America/New_York" },
     { id: "miami", en: "Miami", zh: "迈阿密", tz: "America/New_York" }, { id: "atlanta", en: "Atlanta", zh: "亚特兰大", tz: "America/New_York" }, { id: "chicago", en: "Chicago", zh: "芝加哥", tz: "America/Chicago" }, { id: "detroit", en: "Detroit", zh: "底特律", tz: "America/Detroit" },
     { id: "houston", en: "Houston", zh: "休斯顿", tz: "America/Chicago" }, { id: "dallas", en: "Dallas", zh: "达拉斯", tz: "America/Chicago" }, { id: "austin", en: "Austin", zh: "奥斯汀", tz: "America/Chicago" }, { id: "denver", en: "Denver", zh: "丹佛", tz: "America/Denver" },
@@ -113,15 +107,12 @@ const CITY_DB: CityDef[] = [
     { id: "vancouver", en: "Vancouver", zh: "温哥华", tz: "America/Vancouver" }, { id: "calgary", en: "Calgary", zh: "卡尔加里", tz: "America/Edmonton" }, { id: "ottawa", en: "Ottawa", zh: "渥太华", tz: "America/Toronto" }, { id: "quebec", en: "Quebec", zh: "魁北克", tz: "America/Toronto" },
     { id: "mexicocity", en: "Mexico City", zh: "墨西哥城", tz: "America/Mexico_City" }, { id: "cancun", en: "Cancun", zh: "坎昆", tz: "America/Cancun" }, { id: "guadalajara", en: "Guadalajara", zh: "瓜达拉哈拉", tz: "America/Mexico_City" }, { id: "monterrey", en: "Monterrey", zh: "蒙特雷", tz: "America/Monterrey" },
     { id: "havana", en: "Havana", zh: "哈瓦那", tz: "America/Havana" }, { id: "kingston", en: "Kingston", zh: "金斯敦", tz: "America/Jamaica" },
-    // 南美洲 (South America)
     { id: "saopaulo", en: "Sao Paulo", zh: "圣保罗", tz: "America/Sao_Paulo" }, { id: "riodejaneiro", en: "Rio de Janeiro", zh: "里约热内卢", tz: "America/Sao_Paulo" }, { id: "brasilia", en: "Brasilia", zh: "巴西利亚", tz: "America/Sao_Paulo" }, { id: "buenosaires", en: "Buenos Aires", zh: "布宜诺斯艾利斯", tz: "America/Argentina/Buenos_Aires" },
     { id: "santiago", en: "Santiago", zh: "圣地亚哥(智)", tz: "America/Santiago" }, { id: "bogota", en: "Bogota", zh: "波哥大", tz: "America/Bogota" }, { id: "lima", en: "Lima", zh: "利马", tz: "America/Lima" }, { id: "caracas", en: "Caracas", zh: "加拉加斯", tz: "America/Caracas" },
     { id: "quito", en: "Quito", zh: "基多", tz: "America/Guayaquil" }, { id: "montevideo", en: "Montevideo", zh: "蒙得维的亚", tz: "America/Montevideo" }, { id: "lapaz", en: "La Paz", zh: "拉巴斯", tz: "America/La_Paz" }, { id: "asuncion", en: "Asuncion", zh: "亚松森", tz: "America/Asuncion" },
-    // 大洋洲 (Oceania)
     { id: "sydney", en: "Sydney", zh: "悉尼", tz: "Australia/Sydney" }, { id: "melbourne", en: "Melbourne", zh: "墨尔本", tz: "Australia/Melbourne" }, { id: "brisbane", en: "Brisbane", zh: "布里斯班", tz: "Australia/Brisbane" }, { id: "perth", en: "Perth", zh: "珀斯", tz: "Australia/Perth" },
     { id: "adelaide", en: "Adelaide", zh: "阿德莱德", tz: "Australia/Adelaide" }, { id: "hobart", en: "Hobart", zh: "霍巴特", tz: "Australia/Hobart" }, { id: "darwin", en: "Darwin", zh: "达尔文", tz: "Australia/Darwin" }, { id: "auckland", en: "Auckland", zh: "奥克兰", tz: "Pacific/Auckland" },
     { id: "wellington", en: "Wellington", zh: "惠灵顿", tz: "Pacific/Auckland" }, { id: "christchurch", en: "Christchurch", zh: "基督城", tz: "Pacific/Auckland" }, { id: "fiji", en: "Fiji", zh: "斐济", tz: "Pacific/Fiji" }, { id: "guam", en: "Guam", zh: "关岛", tz: "Pacific/Guam" },
-    // 非洲 (Africa)
     { id: "cairo", en: "Cairo", zh: "开罗", tz: "Africa/Cairo" }, { id: "alexandria", en: "Alexandria", zh: "亚历山大", tz: "Africa/Cairo" }, { id: "johannesburg", en: "Johannesburg", zh: "约翰内斯堡", tz: "Africa/Johannesburg" }, { id: "capetown", en: "Cape Town", zh: "开普敦", tz: "Africa/Johannesburg" },
     { id: "pretoria", en: "Pretoria", zh: "比勒陀利亚", tz: "Africa/Johannesburg" }, { id: "nairobi", en: "Nairobi", zh: "内罗毕", tz: "Africa/Nairobi" }, { id: "casablanca", en: "Casablanca", zh: "卡萨布兰卡", tz: "Africa/Casablanca" }, { id: "lagos", en: "Lagos", zh: "拉各斯", tz: "Africa/Lagos" },
     { id: "abuja", en: "Abuja", zh: "阿布贾", tz: "Africa/Lagos" }, { id: "addisababa", en: "Addis Ababa", zh: "亚的斯亚贝巴", tz: "Africa/Addis_Ababa" }, { id: "algiers", en: "Algiers", zh: "阿尔及尔", tz: "Africa/Algiers" }, { id: "tunis", en: "Tunis", zh: "突尼斯", tz: "Africa/Tunis" },
@@ -130,20 +121,17 @@ const CITY_DB: CityDef[] = [
 ];
 function getCityById(id: string, customCities: CityDef[] = []): CityDef { const f = [...CITY_DB, ...customCities].find(c => c.id === id); return (f as CityDef) || CITY_DB[0]; }
 
-// 涵盖几乎所有 IANA 时区后缀的巨型中文翻译字典
 const TZ_ZH_MAP: Record<string, string> = { "Abidjan":"阿比让","Accra":"阿克拉","Algiers":"阿尔及尔","Bissau":"比绍","Cairo":"开罗","Casablanca":"卡萨布兰卡","Ceuta":"休达","El_Aaiun":"阿尤恩","Johannesburg":"约翰内斯堡","Juba":"朱巴","Khartoum":"喀土穆","Lagos":"拉各斯","Maputo":"马普托","Monrovia":"蒙罗维亚","Nairobi":"内罗毕","Ndjamena":"恩贾梅纳","Sao_Tome":"圣多美","Tripoli":"的黎波里","Tunis":"突尼斯","Windhoek":"温得和克","Adak":"埃达克","Anchorage":"安克雷奇","Anguilla":"安圭拉","Antigua":"安提瓜","Araguaina":"阿拉瓜伊纳","Argentina":"阿根廷","Buenos_Aires":"布宜诺斯艾利斯","Catamarca":"卡塔马卡","Cordoba":"科尔多瓦","Jujuy":"胡胡伊","La_Rioja":"拉里奥哈","Mendoza":"门多萨","Rio_Gallegos":"里奥加耶戈斯","Salta":"萨尔塔","San_Juan":"圣胡安","San_Luis":"圣路易斯","Tucuman":"图库曼","Ushuaia":"乌斯怀亚","Aruba":"阿鲁巴","Asuncion":"亚松森","Bahia":"巴伊亚","Bahia_Banderas":"巴伊亚班德拉斯","Barbados":"巴巴多斯","Belize":"伯利兹","Blanc-Sablon":"布朗萨布隆","Boa_Vista":"博阿维斯塔","Bogota":"波哥大","Boise":"博伊西","Cuiaba":"库亚巴","Curacao":"库拉索","Danmarkshavn":"丹麦港","Dawson":"道森","Dawson_Creek":"道森克里克","Denver":"丹佛","Detroit":"底特律","Dominica":"多米尼加","Edmonton":"埃德蒙顿","Eirunepe":"埃鲁内佩","El_Salvador":"萨尔瓦多","Fort_Nelson":"纳尔逊堡","Fortaleza":"福塔莱萨","Glace_Bay":"格莱斯湾","Godthab":"戈特霍布","Goose_Bay":"鹅湾","Grand_Turk":"大特克","Grenada":"格林纳达","Guadeloupe":"瓜德罗普","Guatemala":"危地马拉","Guayaquil":"瓜亚基尔","Guyana":"圭亚那","Halifax":"哈利法克斯","Havana":"哈瓦那","Hermosillo":"埃莫西约","Indiana":"印第安纳","Indianapolis":"印第安纳波利斯","Knox":"诺克斯","Marengo":"马伦戈","Petersburg":"彼得斯堡","Tell_City":"特尔城","Vevay":"韦韦","Vincennes":"万塞讷","Winamac":"温纳马克","Inuvik":"伊努维克","Iqaluit":"伊卡卢伊特","Jamaica":"牙买加","Juneau":"朱诺","Kentucky":"肯塔基","Louisville":"路易斯维尔","Monticello":"蒙蒂塞洛","Kralendijk":"克拉伦代克","La_Paz":"拉巴斯","Lima":"利马","Los_Angeles":"洛杉矶","Lower_Princes":"下王子区","Maceio":"马塞约","Managua":"马那瓜","Manaus":"马瑙斯","Marigot":"马里戈特","Martinique":"马提尼克","Matamoros":"马塔莫罗斯","Mazatlan":"马萨特兰","Menominee":"梅诺米尼","Merida":"梅里达","Metlakatla":"梅特拉卡特拉","Mexico_City":"墨西哥城","Miquelon":"密克隆","Moncton":"蒙克顿","Monterrey":"蒙特雷","Montevideo":"蒙得维的亚","Montserrat":"蒙特塞拉特","Nassau":"拿骚","New_York":"纽约","Nipigon":"尼皮贡","Nome":"诺姆","Noronha":"诺罗尼亚","North_Dakota":"北达科他","Beulah":"比尤拉","Center":"中心城","New_Salem":"新塞勒姆","Ojinaga":"奥希纳加","Panama":"巴拿马","Pangnirtung":"庞纳图","Paramaribo":"帕拉马里博","Phoenix":"凤凰城","Port-au-Prince":"太子港","Port_of_Spain":"西班牙港","Porto_Velho":"韦柳港","Puerto_Rico":"波多黎各","Punta_Arenas":"蓬塔阿雷纳斯","Rankin_Inlet":"兰金因莱特","Recife":"累西腓","Regina":"里贾纳","Resolute":"雷索卢特","Rio_Branco":"里约布兰科","Santarem":"圣塔伦","Santiago":"圣地亚哥","Santo_Domingo":"圣多明各","Sao_Paulo":"圣保罗","Scoresbysund":"斯科斯比松","Sitka":"锡特卡","St_Barthelemy":"圣巴泰勒米","St_Johns":"圣约翰","St_Kitts":"圣基茨","St_Lucia":"圣卢西亚","St_Thomas":"圣托马斯","St_Vincent":"圣文森特","Swift_Current":"斯威夫特卡伦特","Tegucigalpa":"特古西加尔巴","Thule":"图勒","Thunder_Bay":"桑德贝","Tijuana":"蒂华纳","Toronto":"多伦多","Tortola":"托尔托拉","Vancouver":"温哥华","Whitehorse":"怀特霍斯","Winnipeg":"温尼伯","Yakutat":"亚库塔特","Yellowknife":"黄刀","Crestone":"克雷斯通" };
 const TZ_PREFIX: Record<string, string> = { 'Asia': '亚洲', 'Europe': '欧洲', 'America': '美洲', 'Africa': '非洲', 'Australia': '澳洲', 'Pacific': '太平洋', 'Indian': '印度洋', 'Atlantic': '大西洋', 'Antarctica': '南极洲' };
 
 function getTzDisplayName(tz: string, lang: 'en' | 'zh'): string {
     if (lang !== 'zh') return tz.replace(/_/g, ' ');
-    // 1. 优先查核心城市库
     const matched = CITY_DB.find(c => c.tz === tz);
     if (matched && matched.zh) return `(${TZ_PREFIX[tz.split('/')[0] as string] || ''}) ${matched.zh}`;
-    // 2. 使用强大翻译字典
     let parts = tz.split('/');
     if (parts.length === 1) return tz;
     let prefix = TZ_PREFIX[parts[0] as string] || parts[0];
-    let suffix = parts[parts.length - 1] as string; // 取最后一节
+    let suffix = parts[parts.length - 1] as string;
     let translatedSuffix = TZ_ZH_MAP[suffix] || suffix.replace(/_/g, ' ');
     return `${prefix} / ${translatedSuffix}`;
 }
@@ -343,17 +331,17 @@ class ClockRenderer {
 
     static buildStaticMiniPreview(settings: Partial<MeridianSettings>): HTMLElement {
         const wrapper = activeDocument.createElement("div");
-        wrapper.style.setProperty("width", "100%"); wrapper.style.setProperty("height", "100%");
+        wrapper.setCssStyles({ width: "100%", height: "100%" });
 
         if (settings.clockFace === 'digital') {
             const timeCol = this.getRealColor(settings, 'digiTime');
             const secCol = this.getRealColor(settings, 'digiSec');
             
             const face = wrapper.createEl('div', { cls: 'meridian-digital-face' });
-            face.style.setProperty("font-family", settings.digitalFont || "'Inter', sans-serif");
+            face.setCssStyles({ fontFamily: settings.digitalFont || "'Inter', sans-serif" });
             
             const dt = face.createEl('div', { cls: 'meridian-digital-time' });
-            dt.style.setProperty("font-size", settings.digitalSecSize === 'large' ? '18px' : '22px'); 
+            dt.setCssStyles({ fontSize: settings.digitalSecSize === 'large' ? '18px' : '22px' }); 
             
             const secStyle = settings.digitalSecSize === 'large' 
                 ? `font-size: 1em; margin-left: 2px; font-weight: inherit; color: ${secCol};`
@@ -450,7 +438,7 @@ class MeridianView extends ItemView {
             this.activeAnalog.push({ h: hHand, m: mHand, s: sHand, dateEl: dateEl, tz: cityInfo.tz });
         } else {
             const digitalBox = itemBox.createEl("div", { cls: "meridian-digital-face" });
-            digitalBox.style.setProperty("font-family", this.plugin.settings.digitalFont);
+            digitalBox.setCssStyles({ fontFamily: this.plugin.settings.digitalFont });
             const timeText = digitalBox.createEl("div", { cls: "meridian-digital-time" });
             this.activeDigital.push({ el: timeText, tz: cityInfo.tz });
         }
@@ -539,7 +527,7 @@ class PresetNameModal extends Modal {
         const t = TEXTS[this.plugin.settings.language];
         new Setting(contentEl).setName(t.saveModalTitle as string).setHeading();
         const input = contentEl.createEl('input', { type: 'text', placeholder: t.saveInput });
-        input.style.setProperty("width", "100%"); input.style.setProperty("margin-bottom", "10px");
+        input.setCssStyles({ width: "100%", marginBottom: "10px" });
         const btn = contentEl.createEl('button', { text: t.btnSave, cls: 'mod-cta' });
         btn.onclick = () => { this.onSubmit(input.value || 'My Preset'); this.close(); };
     }
@@ -724,7 +712,7 @@ class MeridianSettingTab extends PluginSettingTab {
             const fontList = FONTS[this.plugin.settings.language] as Array<any>;
             fontList.forEach(font => {
                 const card = fontGrid.createEl('div', { cls: `meridian-font-card ${this.plugin.settings.digitalFont === font.id ? 'is-active' : ''}` });
-                card.style.setProperty("font-family", font.id);
+                card.setCssStyles({ fontFamily: font.id });
                 card.createEl('div', { text: '10:09' });
                 card.createEl('div', { cls: 'meridian-font-label', text: font.name });
                 card.onclick = async () => { this.plugin.settings.digitalFont = font.id; await this.plugin.saveSettings(); this.display(); };
@@ -815,7 +803,7 @@ class MeridianSettingTab extends PluginSettingTab {
             this.previewDigitalEl = null;
         } else {
             const digitalBox = container.createEl("div", { cls: "meridian-digital-face" });
-            digitalBox.style.setProperty("font-family", this.plugin.settings.digitalFont);
+            digitalBox.setCssStyles({ fontFamily: this.plugin.settings.digitalFont });
             this.previewDigitalEl = digitalBox.createEl("div", { cls: "meridian-digital-time" });
             this.previewActiveHands = null;
         }
